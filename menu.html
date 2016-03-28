@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Standard Meta -->
+  <meta charset="utf-8" />
+
+
+  <!-- Site Properties -->
+  <title>Food Truck</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<link rel="stylesheet" href="http://semantic-ui.com/dist/semantic.min.css"/>
+<script src="http://semantic-ui.com/dist/semantic.min.js"></script>
+<script src="http://patrickgawron.com/wp/wp-content/uploads/2013/11/jquery.address.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.ui.star.rating').rating();
+  $('.top.menu .item').tab();
+  $('.demo.menu .item').tab();
+  $('#pay1').click(function(){
+    alert("Order has been received! Wait 5 Min!");
+    window.location.href = "./index.html";
+  });
+    $('#pay2').click(function(){
+    alert("Order has been received! Wait 5 Min!");
+    window.location.href = "./index.html";
+  });
+  }
+);
+</script>
+<style media="screen" type="text/css">
+
+.quantity{
+ width: 60px;
+}
+.ui.menu{
+  height:40px;
+}
+
+</style>
+</head>
+
+
+<body style="margin:10px 40px 0 40px;">
+  <div id="menu" class="ui red menu">
+  <div class="ui container">
+    <a class="active item" href="./index.html">Home</a>
+    <a class="item" href="./profile.html">Profile</a>
+    <a class="item">          <div class="ui search">
+            <div class="ui icon input">
+              <input class="prompt" type="text" placeholder="Search food">
+              <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
+          </div></a>
+    <div class="right menu">
+      <div class="item">
+        <a class="ui button" href="./login.html">Log in</a>
+      </div>
+      <div class="item">
+        <a class="ui primary button" href="./login.html">Sign Up</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui segment">
+<div class="ui container" >
+  <div class="ui relaxed divided items">
+    <div class="item">
+      <div class="ui small image">
+        <img src="./red.jpg">
+      </div>
+      <div class="content">
+        <a class="header">Red FoodTruck</a>
+        <div class="description">
+          Location: In front of Robarts Library.<br>
+          Hours: 9AM - 9PM, Mon-Sat <br>
+          Phone: 6478889999
+
+        </div>
+        <div class="extra">
+
+        </div>
+      </div>
+    </div>
+  </div>  
+ </div>
+</div>
+
+<div class="ui grid">
+  <div class="three column row">
+    <div class="column">
+
+      <div class="ui pointing secondary demo menu">
+        <a class="active red item" data-tab="first">Reviews</a>
+        <a class="blue item" data-tab="second">Make a comment</a>
+        <a class="green item" data-tab="third">Address</a>
+      </div>
+
+    <div class="row">
+      <div class="ui active tab segment" data-tab="first">
+        <div class="ui comments">
+  <div class="comment">
+    <a class="avatar">
+      <img src="http://semantic-ui.com//images/avatar/small/joe.jpg">
+    </a>
+    <div class="content">
+      <a class="author">Joe Henderson</a>
+      <div class="metadata">
+        <div class="date">1 day ago</div>
+      </div>
+      <div class="text">
+        <p>The service I got was awesome. </p>
+      </div>
+      <div class="actions">
+        <a class="reply">Reply</a>
+      </div>
+    </div>
+  </div>
+  <div class="comment">
+    <a class="avatar">
+      <img src="http://semantic-ui.com//images/avatar/small/christian.jpg">
+    </a>
+    <div class="content">
+      <a class="author">Christian Rocha</a>
+      <div class="metadata">
+        <div class="date">2 days ago</div>
+      </div>
+      <div class="text">
+        Fantastic expericne.
+      </div>
+      <div class="actions">
+        <a class="reply">Reply</a>
+      </div>
+    </div>
+  </div>
+  </div>
+      </div>
+      
+      <div class="ui tab segment" data-tab="second">
+        <h4>Rate this food truck:</h4>
+        <div class="ui huge star rating" data-rating="3"></div>
+        <h4>Leave a comment:</h4>
+        <form class="ui reply form">
+          <div class="field">
+            <textarea></textarea>
+          </div>
+          <div class="ui primary submit labeled icon button">
+            <i class="icon edit"></i> Add Comment
+          </div>
+        </form>
+      </div>
+      
+      <div class="ui tab segment" data-tab="third">
+
+        <img class="ui small image"src="./map.jpg"/>
+      </div>
+    </div>
+
+    </div>
+
+    <div class="column">
+      <h2 class="ui header">
+        <i class="food icon"></i>
+        <div class="content">
+          Rice
+        </div>
+      </h2>
+      <div class="ui list">
+            <h5 class="ui header">Quantity
+      </h5>
+      
+        <div class="item">
+          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
+          <div>Chicken Fried Rice</div>
+          <div class="foodprice">$7</div>
+        </div>
+         <div class="item">
+          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
+          Beef Fried Rice
+        </div>       
+         <div class="item">
+          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
+          Chicken Katsu Rice
+        </div>         
+         <div class="item">
+          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
+          Pork chop with Rice
+        </div>
+         <div class="item">
+          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
+          Tomato and Egg with Rice
+        </div>              
+        
+        <h2 class="ui header">
+        <i class="food icon"></i>
+        <div class="content">
+          Noodles
+        </div>
+      </h2>
+        <div class="item">
+          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
+          Chicken Fried Noodle
+        </div>
+        <div class="item">
+          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
+          Seafon Udon
+        </div>
+         <div class="item">
+          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
+          Beef Fried Rice Noodle
+        </div>
+        <div class="item">
+          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
+          Wonton Soup Noodle
+        </div>
+         <div class="item">
+          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
+          Curry Fried Rice Noodle
+        </div>              
+        
+        <h2 class="ui header">
+          <i class="bar icon"></i>
+          <div class="content">
+            Drinks
+          </div>
+        </h2>
+        <div class="item">
+            <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
+            Coke
+        </div>
+         <div class="item">
+            <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
+            Sprite
+        </div>       
+        <div class="item">
+            <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
+            Bubble Tea
+        </div>        
+      </div>
+    </div>
+
+    <div class="column">
+  <button id="pay1" class="massive ui green button">
+    Pay by Cash
+  </button>
+  <hr>
+  <button id="pay2" class="massive ui red button">
+    Pay by Cards
+  </button> 
+
+  </div>
+</div>
+
+
+
+
+
+
+</body>
+
+</html>

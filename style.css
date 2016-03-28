@@ -1,0 +1,80 @@
+.profileedit {
+  text-align: center;
+}
+.profileedit h1{
+	color: lightblue;
+	padding: 10px 10px;
+}
+.profileedit p{
+	color:lightblue;
+	font-size: 18px;
+	padding: 8px 8px;
+}
+.profileedit #username{
+	color: black;
+}
+.profileedit input{
+	border: none;
+}
+.profileedit button {
+	color: white;
+	background-color: lightblue;
+    display: inline-block;
+    margin: 0 0px 0 0;
+    padding: 8px 8px;
+    font-size: 20px;
+    line-height: 1.8;
+    appearance: none;
+    box-shadow: none;
+    border-radius: 0;
+
+}
+.profileedit #gap{
+	padding: 28px 28px;
+	background-color: white;
+}
+
+
+#orderhis h1{
+	text-decoration: underline;
+
+}
+#orderhis div{
+	padding-bottom:10px;
+	border-bottom:1px solid;
+	border-bottom:1px solid;
+}
+
+ul{
+    list-style-type:none;
+}
+
+li{
+	display:inline;
+}
+
+form{
+	display:inline;
+}
+
+#foodul >li{
+	padding-right:15px;
+}
+
+#orderhis{
+	width:80%;
+	padding-top:50px;
+	padding-bottom:50px;
+	padding-left:200px;
+	padding-right:200px;
+}
+
+#vendorimg{
+	width:128px;
+	height:128px;
+}
+
+#foodimg{
+	width:32px;
+	height:32px;
+}
