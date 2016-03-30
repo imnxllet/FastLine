@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>CSC309 A4</title>
+	<title>Profile</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<link rel="stylesheet" href="http://semantic-ui.com/dist/semantic.min.css"/>
 	<script src="http://semantic-ui.com/dist/semantic.min.js"></script>
@@ -27,7 +27,7 @@
 	<body>	
 	<div id="menu" class="ui red menu">
   	<div class="ui container">
-    <a class="active item" href="./index.html">Home</a>
+    <a class="active item" href="/home">Home</a>
     <a class="item" href="">Order Now!</a>
     <a class="item">          
     <div class="ui search">
@@ -53,7 +53,10 @@
 		  </div>
 		  <div class="content">
 		    <div class="ui center aligned segment"><%= user.username %></div>
-		        <a class="ui bottom attached button" href="./edit.html">
+		             <% if (user.truck) { %>
+    <div class="ui center aligned segment"><%= user.truck.name %></div>
+  <% } %>
+		        <a class="ui bottom attached button" href="/profile/edit">
 		       
 			      <i class="add icon"></i>
 			      EDIT

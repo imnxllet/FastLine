@@ -2,7 +2,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 
-var User = require('../routes/User');
+var User = require('../routes/User.js');
 var configAuth = require('./auth.js');
 
 module.exports = function(passport) {
@@ -34,6 +34,7 @@ module.exports = function(passport) {
 					var newUser = new User();
 					newUser.username = username;
 					newUser.password = newUser.generateHash(password);
+					newUser.truck = null;
 
 					newUser.save(function(err){
 						if(err)
@@ -47,7 +48,7 @@ module.exports = function(passport) {
 	}));
 
 	passport.use('local-signup-seller', new LocalStrategy({
-		usernameField: 'email',
+		usernameField: 'username',
 		passwordField: 'password',
 		passReqToCallback: true
 	},
@@ -57,21 +58,23 @@ module.exports = function(passport) {
 				if(err)
 					return done(err);
 				if(user){
-					return done(null, false, req.flash('signupMessage', 'That email already taken'));
+					return done(null, false, req.flash('signupMessage1', 'That email already taken'));
 				} else {
 					var newUser = new User();
-					newUser.truck.username = email;
-					newUser.truck.password = newUser.generateHash(password);
-					newUser.truck.name = req.body.name_seller, 
-				    newUser.truck.address = req.body.address, 
-				    newUser.truck.hours = req.body.hour, 
-				    newUser.truck.phone = req.body.phone,
-				    newUser.truck.type = req.body.type,
+					newUser.username = username;
+					newUser.password = newUser.generateHash(password);
+
+					newUser.truck.name = req.body.name;
+				    newUser.truck.address = req.body.address;
+				    newUser.truck.hours = req.body.hour;
+				    newUser.truck.phone = req.body.phone;
+				    newUser.truck.type_of_food = req.body.type;
+					
 					newUser.save(function(err){
 						if(err)
 							throw err;
 						return done(null, newUser);
-					})
+					});
 				}
 			})
 
@@ -91,7 +94,7 @@ module.exports = function(passport) {
 					if(!user)
 						return done(null, false, req.flash('loginMessage', 'No User found'));
 					if(!user.validPassword(password)){
-						return done(null, false, req.flash('loginMessage', 'invalid password'));
+						return done(null, false, req.flash('loginMessage', 'invalid password or password is not set for your fb account.'));
 					}
 					console.log('user exist!')
 					return done(null, user);
@@ -119,9 +122,8 @@ module.exports = function(passport) {
 	    			else {
 	    				var newUser = new User();
 	    				newUser.facebook.id = profile.id;
-	    				newUser.facebook.token = accessToken;
-	    				newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
 	    				newUser.username = profile.emails[0].value;
+	    				newUser.truck = null;
 
 	    				newUser.save(function(err){
 	    					if(err)

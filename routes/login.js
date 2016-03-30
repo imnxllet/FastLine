@@ -21,7 +21,7 @@ router.post('/login', passport.authenticate('local-login', {
 	}));
 
 router.get('/register', function(req, res){
-  res.render('register.html',{ message: req.flash('signupMessage')});
+  res.render('register.html',{ message: req.flash('signupMessage'),message1: req.flash('signupMessage1')});
 });
 
 router.post('/signup-customer', passport.authenticate('local-signup-customer', {
@@ -64,6 +64,25 @@ router.get('/profile', isLoggedIn, function(req, res){
 		res.render('profile.html', { user: req.user });
 	});
 
+router.get('/profile/edit', isLoggedIn, function(req, res){
+		res.render('edit.html', { user: req.user,message: req.flash('updateMessage')});
+	});
+
+router.post('/update-customer', isLoggedIn, function(req, res){
+	var user_to_update = req.user;
+	console.log(req.user.username);
+	console.log(req.body.password);
+	var password = user_to_update.generateHash(req.body.password);
+	user_to_update.password = password;
+	user_to_update.save(function(err){
+		if(err)
+			throw err;
+		return;
+	});
+	console.log('user modified!');
+	req.flash('updateMessage', 'Password updated!');
+	res.redirect('/profile/edit');
+});
 
 function isLoggedIn(req, res, next) {
 	if(req.isAuthenticated()){

@@ -20,21 +20,16 @@ var userSchema = new Schema({
   comments: [{ truck: String, body: String, date: Date }],
   comment_rating:[{}],
   history: [{truck: String, quantity: Number, food: String, amount: Number, date: Date }],
-  truck:{
-    name: String, 
-    address: String, 
-    hours: String, 
-    phone: Number,
-    profilePic: { data: Buffer, contentType: String },
-    rating: Number,  
-    type: String,
-    menu: [{ price: Number, food: String }]
-  },
   facebook: {
     id: String,
-    token: String,
-    name: String
-  }
+  },
+  truck:{name: String, 
+    address: String, 
+    hours: String, 
+    phone: Number, 
+    rating: Number, 
+    type_of_food: String,
+  menu: [{ price: Number, food: String }]}
 });
 
 
@@ -44,17 +39,23 @@ userSchema.methods.generateHash = function(password){
 }
 
 userSchema.methods.validPassword = function(password){
+  if(!this.password){
+    return false;
+  }
+
   return bcrypt.compareSync(password, this.password);
 }
 
 var User = mongoose.model('User', userSchema);
 
-/*var testUser = new User();
+/*console.log(new User());
+var testUser = new User();
           testUser.username = 'test@test.com';
           testUser.password = testUser.generateHash('testtest');
+          testUser.truck.name = 'mi';*/
 
 
-testUser.save(function (err) {
+/*testUser.save(function (err) {
     if (err) {
       console.log(err);
       return;

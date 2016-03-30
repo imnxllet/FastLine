@@ -5,8 +5,8 @@
     <title>
         Edit profile
     </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <link rel="stylesheet" href="http://semantic-ui.com/dist/semantic.min.css"/>
-    <link rel="stylesheet" type="text/css" href="profile.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="HandheldFriendly" content="true" />
     <meta charset="UTF-8">
@@ -17,14 +17,19 @@
       body{
         margin:10px 40px 0 40px;
       }
+      .ui.input{
+        max-width:200px;
+      }
 
       </style>
+
 </head>
-<body style="margin:10px 40px 0 40px;">
+<body>
 <div id="menu" class="ui red menu">
   <div class="ui container">
-    <a class="active item" href="./index.html">Home</a>
-    <a class="item" href="./profile.html">Profile</a>
+    <a class="active item" href="/home">Home</a>
+    <a class="item" href="/profile">Profile</a>
+    <a class="item" href="">Order now!</a>
     <a class="item">          <div class="ui search">
             <div class="ui icon input">
               <input class="prompt" type="text" placeholder="Search food">
@@ -33,26 +38,39 @@
             <div class="results"></div>
           </div></a>
     <div class="right menu">
-      <div class="item">
-        <a class="ui button" href="./login.html">Log in</a>
+    <div class="item">
+        Welcome! <%= user.username %>
       </div>
       <div class="item">
-        <a class="ui primary button" href="./login.html">Sign Up</a>
+        <a class="ui primary button" href="/logout">Log out</a>
       </div>
     </div>
   </div>
 </div>  
  
 
-<div class="ui center aligned segment">
-    <h1>Profile</h1>
-    <p id="username">Your User Name</p>
-    
-    <p id="userphone">Change Food preference: <input id="phonetext" type="text" placeholder="#thai"n> </p>
-    
-    <p id="userpass">Change passwords: <input id="passtext" type="text" placeholder="*******"n> </p>
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h1>Edit your Profile</h1>
+    <div class = 'ui orange big label'><%= user.username %></div>
+     <br/><br/>
+    <form class="ui large form" action='/update-customer' method='POST'>
 
-    <a class="ui teal button" href="./index.html">Update</a>
+      <div class="ui stacked segment">
+        <div class="field">Change passwords: 
+          <div class="ui left icon input">
+            <input type="text" name="password">
+          </div>
+    
+          <input class="ui teal submit button" type='submit' value='Update'>
+           <% if (message.length > 0) { %>
+    <div class="ui green message"><%= message %></div>
+  <% } %>
+          </div>
+      </div>
+    </form>
+  </div>
+</div>    
 
     
 
