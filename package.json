@@ -1,5 +1,5 @@
 {
-  "name": "a4",
+  "name": "FastLine",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,14 +9,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "~4.13.4",
+    "bcrypt": "^0.8.5",
+    "body-parser": "~1.15.0",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.1",
     "debug": "~2.1.1",
+    "express": "~4.13.4",
+    "express-session": "^1.13.0",
     "jade": "~1.9.2",
-    "morgan": "~1.5.3",
-    "body-parser": "~1.15.0" ,
-    "serve-favicon": "~2.3.0",
     "mongodb": "~2.1.7",
-    "mongoose": "~4.4.7"
+    "mongoose": "~4.4.7",
+    "morgan": "~1.5.3",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.0",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "~2.3.0"
   }
 }

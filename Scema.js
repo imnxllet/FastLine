@@ -1,15 +1,16 @@
 var userSchema = new Schema({
   username:  String,
   password: String,
-  info:[{name: String, address: String, hours: String, phone: Number}],
-  profilePic: { data: Buffer, contentType: String },
-  rating: Number,
   comments: [{ truck: String, body: String, date: Date }],
-  comment_rating:[{ truck: String, rate: Number, date: Date }]
-  user_type: String,
-  type_of_food: String,
-  menu: [{ price: Number, food: String }],
+  comment_rating:[{ truck: String, rate: Number, date: Date }],
   history: [{truck: String, quantity: Number, food: String, amount: Number, date: Date }],
+  truck:{
+    info:[{name: String, address: String, hours: String, phone: Number}],
+    profilePic: { data: Buffer, contentType: String },
+    rating: Number,  
+    type_of_food: String,
+    menu: [{ price: Number, food: String }]
+  }
 });
 
 

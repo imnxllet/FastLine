@@ -6,7 +6,25 @@ var login = require('./routes/login.js');
 app.engine('.html', require('ejs').__express);
 app.set('views', __dirname);
 app.set('view engine', 'html');
+var passport = require('passport');
+var morgan = require('morgan');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var flash = require('connect-flash');
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
 
+app.use(morgan('dev'));
+app.use(session({secret: 'anystringoftext',
+				 saveUninitialized: true,
+				 resave: true}));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash());
 //serve static file.
 app.use(express.static('public/images'));
 /*var bodyParser = require('body-parser')

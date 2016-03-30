@@ -6,25 +6,64 @@
 <link rel="stylesheet" href="http://semantic-ui.com/dist/semantic.min.css"/>
 <script src="http://semantic-ui.com/dist/semantic.min.js"></script>
 <script src="http://patrickgawron.com/wp/wp-content/uploads/2013/11/jquery.address.js"></script>  
-<style type="text/css">
+
+
+
+
+ 
+
+  <style type="text/css">
     body {
       background-color: #DADADA;
     }
     body > .grid {
+      height: 100%;
     }
     .image {
       margin-top: -100px;
     }
     .column {
-      max-width: 600px;
-      max-height: 800px;
-      height: 100%;
+      max-width: 450px;
     }
-    .ui.segment{
-    	height:450px;
-    }
-
   </style>
+  <script>
+  $(document)
+    .ready(function() {
+      $('.ui.form')
+        .form({
+          fields: {
+            username: {
+              identifier  : 'username',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your e-mail'
+                },
+                {
+                  type   : 'email',
+                  prompt : 'Please enter a valid e-mail'
+                }
+              ]
+            },
+            password: {
+              identifier  : 'password',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'length[6]',
+                  prompt : 'Your password must be at least 6 characters'
+                }
+              ]
+            }
+          }
+        })
+      ;
+    })
+  ;
+  </script>
 </head>
  
 <body>
@@ -38,56 +77,49 @@
       </div>
     </h2>
 
-
-    <div class="ui two column middle aligned very relaxed stackable grid">
+<div class="ui middle aligned center aligned grid">
   <div class="column">
-  <div class="ui segment">
-    <h2>Login</h2>
-		<p>Enter your username and password to login</p>
-		<form class="ui form">
-		  <div class="field">
-		    <label>First Name</label>
-		    <input type="text" name="first-name" placeholder="First Name">
-		  </div>
-		  <div class="field">
-		    <label>Last Name</label>
-		    <input type="text" name="last-name" placeholder="Last Name">
-		  </div>
-		  <a class="ui blue button" type="button" href="./index.html">Submit</a>
-		</form>
-  </div>
-  </div>
+    <h2 class="ui teal image header">
+      <div class="content">
+        Log-in to your account
+      </div>
+    </h2>
+    <form class="ui large form" action='/login' method='POST'>
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" name="username" placeholder="E-mail address">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" placeholder="Password">
+          </div>
+        </div>
+        <input class="ui fluid large teal submit button" type='submit' value='Login' ></input>
+        <br/>
+        <a href="/auth/facebook" class='ui fluid large teal submit button'>Log in with Facebook</a>
+      </div>
 
-  <div class="center aligned column">
-  <div class="ui segment">
-    <h2>Sign up now!</h2>
-		<p>Please fill in the following information to get aceess to FastLine!</p>
-		<form class="ui form">
-		  <div class="field">
-		    <label>Email</label>
-		    <input type="text" name="email" placeholder="Email Address">
-		  </div>
-		  <div class="field">
-		    <label>Password</label>
-		    <input type="text" name="pwd" placeholder="Password">
-		  </div>
-		  <div class="field">
-		    <input type="text" name="pwd1" placeholder="Conform your Password">
-		  </div>		  
 
-		  <a class="ui blue button" type="button" href="./index.html">Submit</a>
-	
-		</form>
-	</div>	
+      <div class="ui error message"></div>
+  <% if (message.length > 0) { %>
+    <div class="ui red message"><%= message %></div>
+  <% } %>
+    </form>
+
+    <div class="ui message">
+      New to us? 
+      <form action='/register' method='GET'>
+      <input class="ui blue button" type='submit' value='Sign up' ></input>
+      </form>
+    </div>
   </div>
 </div>
-
-		
-
-		
-	</div>
-</div>
-
 
 </body>
+
 </html>
+

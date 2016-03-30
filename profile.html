@@ -28,7 +28,7 @@
 	<div id="menu" class="ui red menu">
   	<div class="ui container">
     <a class="active item" href="./index.html">Home</a>
-    <a class="item" href="./profile.html">Profile</a>
+    <a class="item" href="">Order Now!</a>
     <a class="item">          
     <div class="ui search">
             <div class="ui icon input">
@@ -39,10 +39,10 @@
           </div></a>
     <div class="right menu">
       <div class="item">
-        <a class="ui button" href="./login.html">Log in</a>
+        Welcome! <%= user.username %>
       </div>
       <div class="item">
-        <a class="ui primary button" href="./login.html">Sign Up</a>
+        <a class="ui primary button" href="/logout">Log out</a>
       </div>
     </div>
   </div>
@@ -52,7 +52,7 @@
 		    <img src="http://semantic-ui.com/images/avatar2/large/elyse.png">
 		  </div>
 		  <div class="content">
-		    <div class="ui center aligned segment">admin@fastline.com</div>
+		    <div class="ui center aligned segment"><%= user.username %></div>
 		        <a class="ui bottom attached button" href="./edit.html">
 		       
 			      <i class="add icon"></i>

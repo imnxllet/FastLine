@@ -138,7 +138,7 @@
 <div class="ui large top fixed hidden menu">
   <div class="ui container">
     <a class="active item">Home</a>
-    <a class="item" href="./profile.html">Profile</a>
+    <a class="item" href="/profile">Profile</a>
     <a class="item">          <div class="ui search">
             <div class="ui icon input">
               <input class="prompt" type="text" placeholder="Search food">
@@ -148,10 +148,10 @@
           </div></a>
     <div class="right menu">
       <div class="item">
-        <a class="ui button" href="./login.html">Log in</a>
+        Welcome! <%= user.username %>
       </div>
       <div class="item">
-        <a class="ui primary button" href="./login.html">Sign Up</a>
+        <a class="ui primary button" href="/logout">Log out</a>
       </div>
     </div>
   </div>
@@ -168,7 +168,7 @@
           <i class="sidebar icon"></i>
         </a>
         <a class="active item">Home</a>
-        <a class="item" href="./profile.html">Profile</a>
+        <a class="item" href="/profile">Profile</a>
         <a class="item">
           <div class="ui search">
             <div class="ui icon input">
@@ -179,8 +179,9 @@
           </div>
         </a>
         <div class="right item">
-          <a class="ui inverted button" href="./login.html">Log in</a>
-          <a class="ui inverted button" href="./login.html">Sign Up</a>
+          <div class="ui huge label">Welcome! <%= user.username %></div>
+          <a class="ui inverted button" href="/logout">Log out</a>
+          
         </div>
       </div>
     </div>
@@ -234,6 +235,7 @@
         <div class="seven wide column">
           <h4 class="ui inverted header">Designer</h4>
           <p>This web is deigned by Chris, Lei, Josh and Jason.</p>
+
         </div>
       </div>
     </div>
