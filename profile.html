@@ -21,6 +21,7 @@
 	  }
 
 	  </style>
+	 
 </head>
 
 
@@ -28,7 +29,7 @@
 	<div id="menu" class="ui red menu">
   	<div class="ui container">
     <a class="active item" href="/home">Home</a>
-    <a class="item" href="">Order Now!</a>
+    <a class="item" href="/trucklist">Order Now!</a>
     <a class="item">          
     <div class="ui search">
             <div class="ui icon input">
@@ -53,8 +54,14 @@
 		  </div>
 		  <div class="content">
 		    <div class="ui center aligned segment"><%= user.username %></div>
-		             <% if (user.truck) { %>
-    <div class="ui center aligned segment"><%= user.truck.name %></div>
+		             <% if (user.truck.name) { %>
+    <div class="ui center aligned segment">
+    	<p>Name: <%= user.truck.name %></p>
+    	<p>Address: <%= user.truck.address %></p>
+    	<p>Hours of operation: <%= user.truck.hour %></p>
+    	<p>Phone#: <%= user.truck.phone %></p>
+    	<p>Food type: <%= user.truck.type_of_food %></p>
+    </div>
   <% } %>
 		        <a class="ui bottom attached button" href="/profile/edit">
 		       
@@ -65,6 +72,7 @@
 			      <i class="add icon"></i>
 			      History of Transaction
 			    </a>
+			    <p id='chris'></p>
 		  </div>
 		</div>
 	</body>

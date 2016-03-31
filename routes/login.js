@@ -13,6 +13,9 @@ router.get('/truck.jpg', function(req, res) {
   res.sendFile('truck.jpg');
 });
 
+router.get('/white.jpg', function(req, res) {
+  res.sendFile('white.jpg');
+});
 
 router.post('/login', passport.authenticate('local-login', {
 		successRedirect: '/home',
@@ -69,6 +72,11 @@ router.get('/profile/edit', isLoggedIn, function(req, res){
 	});
 
 router.post('/update-customer', isLoggedIn, function(req, res){
+	if(req.body.password.length < 6){
+		req.flash('updateMessage', 'Please Enter a password with at least 6 characters!');
+		res.redirect('/profile/edit');
+		return;
+	}
 	var user_to_update = req.user;
 	console.log(req.user.username);
 	console.log(req.body.password);
@@ -84,6 +92,21 @@ router.post('/update-customer', isLoggedIn, function(req, res){
 	res.redirect('/profile/edit');
 });
 
+router.get('/trucklist', isLoggedIn, function(req, res){
+	//Find all books.
+	User.find({truck: {$exists: true}},function(err, trucks) {
+      if (err) {
+        res.status(500).send(err);
+        console.log(err);
+        return;
+      }
+      //console.log(trucks);
+      //console.log(req.params.id);
+      res.render('trucklist.html', { user: req.user, trucks: turnTruckstoHtmlList(trucks)});
+   });
+		
+});
+
 function isLoggedIn(req, res, next) {
 	if(req.isAuthenticated()){
 		console.log('is logged in!');
@@ -92,5 +115,14 @@ function isLoggedIn(req, res, next) {
     console.log('is not logged in!');
 	res.redirect('/');
 }
+
+function turnTruckstoHtmlList(trucklist){
+    console.log(trucklist.length);
+    var result = [];
+    for(i=0;i<trucklist.length;i++){
+       result.push(trucklist[i]);
+    }
+    return result;
+  }
 
 module.exports = router;

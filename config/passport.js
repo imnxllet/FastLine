@@ -34,7 +34,7 @@ module.exports = function(passport) {
 					var newUser = new User();
 					newUser.username = username;
 					newUser.password = newUser.generateHash(password);
-					newUser.truck = null;
+					//newUser.truck = null;
 
 					newUser.save(function(err){
 						if(err)
@@ -123,7 +123,6 @@ module.exports = function(passport) {
 	    				var newUser = new User();
 	    				newUser.facebook.id = profile.id;
 	    				newUser.username = profile.emails[0].value;
-	    				newUser.truck = null;
 
 	    				newUser.save(function(err){
 	    					if(err)

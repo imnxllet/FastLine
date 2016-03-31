@@ -47,7 +47,15 @@ userSchema.methods.validPassword = function(password){
 }
 
 var User = mongoose.model('User', userSchema);
-
+  /*User.find({truck: {$exists: true}},function(err, trucks) {
+      if (err) {
+        res.status(500).send(err);
+        console.log(err);
+        return;
+      }
+      console.log(trucks);
+   });
+  
 /*console.log(new User());
 var testUser = new User();
           testUser.username = 'test@test.com';
