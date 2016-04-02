@@ -42,10 +42,11 @@ $(document).ready(function(){
 
 
 <body style="margin:10px 40px 0 40px;">
-  <div id="menu" class="ui red menu">
+<div id="menu" class="ui red menu">
   <div class="ui container">
-    <a class="active item" href="./index.html">Home</a>
-    <a class="item" href="./profile.html">Profile</a>
+    <a class="active item" href="/home">Home</a>
+    <a class="item" href="/profile">Profile</a>
+    <a class="item" href="/trucklist">Order now!</a>
     <a class="item">          <div class="ui search">
             <div class="ui icon input">
               <input class="prompt" type="text" placeholder="Search food">
@@ -54,30 +55,30 @@ $(document).ready(function(){
             <div class="results"></div>
           </div></a>
     <div class="right menu">
-      <div class="item">
-        <a class="ui button" href="./login.html">Log in</a>
+    <div class="item">
+        Welcome! <%= user.username %>
       </div>
       <div class="item">
-        <a class="ui primary button" href="./login.html">Sign Up</a>
+        <a class="ui primary button" href="/logout">Log out</a>
       </div>
     </div>
   </div>
-</div>
+</div>  
 
 <div class="ui segment">
 <div class="ui container" >
   <div class="ui relaxed divided items">
     <div class="item">
       <div class="ui small image">
-        <img src="./red.jpg">
+        <img src="/white.jpg">
       </div>
       <div class="content">
-        <a class="header">Red FoodTruck</a>
+        <h class="ui red huge header"><%= truck.truck.name %></h>
         <div class="description">
-          Location: In front of Robarts Library.<br>
-          Hours: 9AM - 9PM, Mon-Sat <br>
-          Phone: 6478889999
-
+          Location: <%= truck.truck.address %><br>
+          Hours: <%= truck.truck.hours %><br>
+          Phone: <%= truck.truck.phone %><br>
+          Type: <%= truck.truck.type_of_food %>
         </div>
         <div class="extra">
 
@@ -142,13 +143,14 @@ $(document).ready(function(){
         <h4>Rate this food truck:</h4>
         <div class="ui huge star rating" data-rating="3"></div>
         <h4>Leave a comment:</h4>
-        <form class="ui reply form">
+        
+        <form class="ui reply form" action="/addcomment" method="POST">
           <div class="field">
-            <textarea></textarea>
+            <input name="comment" class=""></input>
           </div>
-          <div class="ui primary submit labeled icon button">
-            <i class="icon edit"></i> Add Comment
-          </div>
+          <input class="ui orange submit button" type='submit' value='Add Comment'>
+          </input>
+        
         </form>
       </div>
       
@@ -161,94 +163,42 @@ $(document).ready(function(){
     </div>
 
     <div class="column">
-      <h2 class="ui header">
+
+      <div class="ui list">
+        <div class=" item">
+        <div class="ui right aligned segment">
+              <h2 class="ui header">
         <i class="food icon"></i>
         <div class="content">
-          Rice
+          Menu
         </div>
       </h2>
-      <div class="ui list">
-            <h5 class="ui header">Quantity
-      </h5>
+          <div class="ui celled horizontal list">
+            <div class="item"> <h5 class="ui red header">Quantity</h5></div>
+            <div class="item"> <h5 class="ui red header">Dish</h5></div>
+            <div class="item"><h5 class="ui red header">Price</h5></div>
+          </div>
+        </div></div>
+           
       
         <div class="item">
-          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
-          <div>Chicken Fried Rice</div>
-          <div class="foodprice">$7</div>
-        </div>
-         <div class="item">
-          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
-          Beef Fried Rice
-        </div>       
-         <div class="item">
-          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
-          Chicken Katsu Rice
-        </div>         
-         <div class="item">
-          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
-          Pork chop with Rice
-        </div>
-         <div class="item">
-          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
-          Tomato and Egg with Rice
-        </div>              
+          <div class="ui celled horizontal list">
+            <div class="item"><input class="quantity" type='number' size='100' name='mynumber' value='0' /></div>
+            <div class="item">Chicken Fried Rice</div>
+            <div class="item">$7</div>
+          </div>         
+        </div>             
         
-        <h2 class="ui header">
-        <i class="food icon"></i>
-        <div class="content">
-          Noodles
-        </div>
-      </h2>
-        <div class="item">
-          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
-          Chicken Fried Noodle
-        </div>
-        <div class="item">
-          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
-          Seafon Udon
-        </div>
-         <div class="item">
-          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
-          Beef Fried Rice Noodle
-        </div>
-        <div class="item">
-          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
-          Wonton Soup Noodle
-        </div>
-         <div class="item">
-          <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
-          Curry Fried Rice Noodle
-        </div>              
         
-        <h2 class="ui header">
-          <i class="bar icon"></i>
-          <div class="content">
-            Drinks
-          </div>
-        </h2>
-        <div class="item">
-            <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
-            Coke
-        </div>
-         <div class="item">
-            <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
-            Sprite
-        </div>       
-        <div class="item">
-            <input class="quantity" type='number' size='10' id='numberinput' name='mynumber' value='0' />
-            Bubble Tea
         </div>        
       </div>
-    </div>
+
 
     <div class="column">
   <button id="pay1" class="massive ui green button">
-    Pay by Cash
+    Pay Now
   </button>
-  <hr>
-  <button id="pay2" class="massive ui red button">
-    Pay by Cards
-  </button> 
+
 
   </div>
 </div>

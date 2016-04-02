@@ -68,11 +68,11 @@
 <% for(var i=0; i<trucks.length; i++) {%>
 <div class="ui item">
 <div class="ui card">
-  <a class="image" href="/menu">
+  <a class="image" href="/menu/<%= trucks[i].truck.name %>">
     <img src="./white.jpg">
   </a>
   <div class="content">
-    <a class="ui center aligned huge header" href="/menu"><%= trucks[i].truck.name %></a>
+    <a class="ui center aligned huge header" href="/menu/<%= trucks[i].truck.name %>"><%= trucks[i].truck.name %></a>
   </div>
 </div>
 </div>

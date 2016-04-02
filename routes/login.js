@@ -94,7 +94,7 @@ router.post('/update-customer', isLoggedIn, function(req, res){
 
 router.get('/trucklist', isLoggedIn, function(req, res){
 	//Find all books.
-	User.find({truck: {$exists: true}},function(err, trucks) {
+	User.find({'truck.name': {$exists: true}},function(err, trucks) {
       if (err) {
         res.status(500).send(err);
         console.log(err);
@@ -106,6 +106,49 @@ router.get('/trucklist', isLoggedIn, function(req, res){
    });
 		
 });
+
+router.get('/menu/:name', isLoggedIn, function(req, res){
+   var truckname = req.params.name;
+   User.findOne({'truck.name': truckname}, function(err, truck) {
+    if (err) {
+      res.status(500).send(err);
+      console.log(err);
+      return;
+    }
+
+    // If the book is not found, we return 404.
+    if (!truck) {
+      res.status(404).send('Not found.');
+      console.log('Truck not found.');
+      return;
+    }
+
+    // If found, we return the info.
+    //console.log(truck); 
+    res.render('menu.html', { user: req.user, truck: truck});
+  });
+});
+
+router.post('/addcomment', isLoggedIn, function(req, res){
+    console.log(req.truck);
+    if(req.body.comment){
+		var comment = {user: req.user.username, body: req.body.comment, date: Date.now()};
+		var truck_edit = req.truck; 
+		truck_edit .truck.comments.push(comment);
+		truck_edit .save(function(err){
+		if(err)
+			throw err;
+		return;
+	    });
+		console.log(req.body.comment + ' comment added!');
+		res.redirect('/menu/' + truck_edit .truck.name);
+	}else{
+		var truck_edit = req.truck;
+		console.log('NO comment !!!');
+		res.redirect('/menu/' + truck_edit.truck.name);
+	}
+	});
+
 
 function isLoggedIn(req, res, next) {
 	if(req.isAuthenticated()){
