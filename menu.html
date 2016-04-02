@@ -102,40 +102,27 @@ $(document).ready(function(){
     <div class="row">
       <div class="ui active tab segment" data-tab="first">
         <div class="ui comments">
-  <div class="comment">
+
+        <% for(var i=0; i<truck.truck.comments.length; i++) {%>
+<div class="comment">
     <a class="avatar">
       <img src="http://semantic-ui.com//images/avatar/small/joe.jpg">
     </a>
     <div class="content">
-      <a class="author">Joe Henderson</a>
+      <a class="author"><%= truck.truck.comments[i].user%></a>
       <div class="metadata">
-        <div class="date">1 day ago</div>
+        <div class="date"><%= truck.truck.comments[i].date%></div>
       </div>
       <div class="text">
-        <p>The service I got was awesome. </p>
-      </div>
-      <div class="actions">
-        <a class="reply">Reply</a>
+        <p><%= truck.truck.comments[i].body%></p>
       </div>
     </div>
   </div>
-  <div class="comment">
-    <a class="avatar">
-      <img src="http://semantic-ui.com//images/avatar/small/christian.jpg">
-    </a>
-    <div class="content">
-      <a class="author">Christian Rocha</a>
-      <div class="metadata">
-        <div class="date">2 days ago</div>
-      </div>
-      <div class="text">
-        Fantastic expericne.
-      </div>
-      <div class="actions">
-        <a class="reply">Reply</a>
-      </div>
-    </div>
-  </div>
+
+
+<% } %>
+  
+  
   </div>
       </div>
       
@@ -144,7 +131,7 @@ $(document).ready(function(){
         <div class="ui huge star rating" data-rating="3"></div>
         <h4>Leave a comment:</h4>
         
-        <form class="ui reply form" action="/addcomment" method="POST">
+        <form class="ui reply form" action="/addcomment/<%= truck.truck.name %>" method="POST">
           <div class="field">
             <input name="comment" class=""></input>
           </div>

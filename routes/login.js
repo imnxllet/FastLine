@@ -119,7 +119,6 @@ router.get('/menu/:name', isLoggedIn, function(req, res){
     // If the book is not found, we return 404.
     if (!truck) {
       res.status(404).send('Not found.');
-      console.log('Truck not found.');
       return;
     }
 
@@ -129,19 +128,32 @@ router.get('/menu/:name', isLoggedIn, function(req, res){
   });
 });
 
-router.post('/addcomment', isLoggedIn, function(req, res){
-    console.log(req.truck);
+router.post('/addcomment/:name', isLoggedIn, function(req, res){
+    var truckname = req.params.name;
+    console.log(truckname);
     if(req.body.comment){
-		var comment = {user: req.user.username, body: req.body.comment, date: Date.now()};
-		var truck_edit = req.truck; 
-		truck_edit .truck.comments.push(comment);
-		truck_edit .save(function(err){
-		if(err)
-			throw err;
-		return;
-	    });
-		console.log(req.body.comment + ' comment added!');
-		res.redirect('/menu/' + truck_edit .truck.name);
+    	User.findOne({'truck.name': truckname}, function(err, truck) {
+		    if (err) {
+		      res.status(500).send(err);
+		      console.log(err);
+		      return;
+		    }
+		    if (!truck) {
+		      res.status(404).send('Not found.');
+		      return;
+		    }
+
+		    var comment = {user: req.user.username, body: req.body.comment, date: Date.now()};	
+			truck.truck.comments.push(comment);
+			truck.save(function(err){
+				if(err)
+					throw err;
+				return;
+			    });
+				console.log(req.body.comment + ' comment added!');
+				res.redirect('/menu/' + truckname);
+			
+			});	
 	}else{
 		var truck_edit = req.truck;
 		console.log('NO comment !!!');
