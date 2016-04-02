@@ -68,7 +68,11 @@ router.get('/profile', isLoggedIn, function(req, res){
 	});
 
 router.get('/profile/edit', isLoggedIn, function(req, res){
+	if(!req.user.truck.name){
 		res.render('edit.html', { user: req.user,message: req.flash('updateMessage')});
+	}else{
+		res.render('update.html', { user: req.user,message: req.flash('updateMessage')});
+	}
 	});
 
 router.post('/update-customer', isLoggedIn, function(req, res){

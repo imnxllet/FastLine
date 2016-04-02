@@ -8,7 +8,7 @@
 <script src="http://patrickgawron.com/wp/wp-content/uploads/2013/11/jquery.address.js"></script>  
 <style type="text/css">
     body {
-      background-color: #DADADA;
+      background-color: white;
     }
     body > .grid {
     }
@@ -20,9 +20,13 @@
 
 
     }
-    .ui.segment{
-      width: : 1200px;
+  
+
+    .ui.menu{
+      height:40px;
     }
+
+
 
   </style>
   <script type="text/javascript">
@@ -94,6 +98,28 @@
 </head>
  
 <body>
+<div  class="ui red menu">
+  <div class="ui container">
+    <a class="active item" href="/home">Home</a>
+    <a class="item" href="/profile">Profile</a>
+    <a class="item" href="/trucklist">Order now!</a>
+    <a class="item">          <div class="ui search">
+            <div class="ui icon input">
+              <input class="prompt" type="text" placeholder="Search food">
+              <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
+          </div></a>
+    <div class="right menu">
+    <div class="item">
+        Welcome! <%= user.username %>
+      </div>
+      <div class="item">
+        <a class="ui primary button" href="/logout">Log out</a>
+      </div>
+    </div>
+  </div>
+</div>  
 
 <div class="ui middle aligned center aligned grid" id="">
   <div class="column">
@@ -106,12 +132,12 @@
   </div>
 </div>
 
-  <div class="ui middle aligned center aligned grid">
-  <div class="ui segment">
+  <div class="ui  center aligned grid" id="">
+  <div class="ui center aligned segment">
     <h2>Edit Your  Info</h2>
     <hr>
     <h3>Account Info</h3>
-    <button type="button" onclick="show('personal')">Edit</button>
+    <button type="button" class='ui red button' onclick="show('personal')">Edit</button>
     <div class="personalinfo" id="personal"  style="display:none">
     		<form class="ui form" action='/signup-seller' method='POST'>
           <div class="field">
@@ -125,7 +151,7 @@
         </form>
     </div>
     <h3>Truck Info</h3>
-    <button type="button" onclick="show('truck')">Edit</button>
+    <button type="button" class='ui red button' onclick="show('truck')">Edit</button>
     <div class="truckinfo" id="truck"  style="display:none">
         <form class="ui form" action='/signup-seller' method='POST'>
           <div class="field">
@@ -150,26 +176,22 @@
           </div>
           <div class="ui error message"></div>
             <!-- show any messages that come back with authentication -->
-          <% if (message1.length > 0) { %>
-            <div class="ui red message"> <%= message1 %> </div>
-          <% } %>
+       
 
     		  <input class="ui blue button" type="submit" value='Save'></input>
         </form>
     </div>
         <h3>Menu</h3>
-        <button type ="button" onclick="show('menu')">Edit</button>
+        <button type ="button" class='ui red button' onclick="show('menu')">Edit</button>
         <div class="menu" id="menu"  style="display:none">
         <form class="ui form" action='/signup-seller' method='POST'>
           <input type='button' value='Add' id='add'>
           <input type='button' value='Remove' id='remove'>
           <input class="ui blue button" type="submit" value='Save'></input>
         </form>
+        </div>
     </div>
-
-
-</div>
-</div>	
+</div>	</div>
 
 
 
