@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>payment page</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="http://semantic-ui.com/dist/semantic.min.css"/>
+  <script src="http://semantic-ui.com/dist/semantic.min.js"></script>
+  <script src="http://patrickgawron.com/wp/wp-content/uploads/2013/11/jquery.address.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="HandheldFriendly" content="true" />
+  <meta charset="UTF-8">
+    <style type="text/css">
+
+    .hidden.menu {
+      display: none;
+    }
+    #topmenu{
+      height:60px;
+    }
+
+    .masthead.segment {
+      min-height: 700px;
+      padding: 1em 0em;
+    }
+    .masthead .logo.item img {
+      margin-right: 1em;
+    }
+    .masthead .ui.menu .ui.button {
+      margin-left: 0.5em;
+    }
+    .masthead h1.ui.header {
+      margin-top: 3em;
+      margin-bottom: 0em;
+      font-size: 4em;
+      font-weight: normal;
+    }
+    .masthead h2 {
+      font-size: 1.7em;
+      font-weight: normal;
+    }
+
+    .ui.vertical.stripe {
+      padding: 8em 0em;
+    }
+    .ui.vertical.stripe h3 {
+      font-size: 2em;
+    }
+    .ui.vertical.stripe .button + h3,
+    .ui.vertical.stripe p + h3 {
+      margin-top: 3em;
+    }
+    .ui.vertical.stripe .floated.image {
+      clear: both;
+    }
+    .ui.vertical.stripe p {
+      font-size: 1.33em;
+    }
+    .ui.vertical.stripe .horizontal.divider {
+      margin: 3em 0em;
+    }
+
+    .quote.stripe.segment {
+      padding: 0em;
+    }
+    .quote.stripe.segment .grid .column {
+      padding-top: 5em;
+      padding-bottom: 5em;
+    }
+
+    .footer.segment {
+      padding: 5em 0em;
+    }
+
+    .secondary.pointing.menu .toc.item {
+      display: none;
+    }
+
+    @media only screen and (max-width: 700px) {
+      .ui.fixed.menu {
+        display: none !important;
+      }
+      .secondary.pointing.menu .item,
+      .secondary.pointing.menu .menu {
+        display: none;
+      }
+      .secondary.pointing.menu .toc.item {
+        display: block;
+      }
+      .masthead.segment {
+        min-height: 350px;
+      }
+      .masthead h1.ui.header {
+        font-size: 2em;
+        margin-top: 1.5em;
+      }
+      .masthead h2 {
+        margin-top: 0.5em;
+        font-size: 1.5em;
+      }
+      body{
+  background-color: black;
+}
+/*payment methods*/
+.payment {
+  padding: 18px 0px;
+  background-color: black;
+  margin: 0 auto;
+  width: 48%;
+  float: left;
+}
+
+.form-container {
+  width: 100%;
+  background-color: black;
+}
+.payment h2{
+  margin-bottom: 0px;
+  background-color: grey;
+  color: #fff;
+  padding: 8px 8px;
+  text-align: center;
+}
+
+.care1{
+  margin-bottom: 0px;
+  color: #fff;
+  padding: 8px 8px;
+  padding-bottom: 0px;
+}
+
+.orderinformation h1 {
+  /*font-size: 1.3em;*/
+  color:black;
+  text-align:center;
+  /*text-decoration: underline; */
+  
+}
+h5{
+  text-align:center;
+  
+}
+.payment input {
+  margin-top: 1px;
+  color:black;
+}
+.payment input[type="text"]{
+  display: block;
+  height: 30px;
+  width: 100%;
+  padding-left: 10px;
+  border: none;
+}
+.payment input[type="email"]{
+  display: block;
+  height: 30px;
+  width: 100%;
+  padding-left:10px;
+  border: none;
+}
+.payment input[type="placeorder"]{
+  display: block;
+  height: 40px;
+  width: 100%;
+  border: none;
+  background-color: lightblue;
+  color: #fff;
+  curson: pointer;
+  text-align: center;
+  font-size: 100%;
+  margin-bottom: 18px;
+}
+.payment input[type="placeorder"]:hover{
+  background-color: #6FB7E9;
+  transition: 0.2s ease;
+}
+.payment form #left {
+  width: 47%;
+  float: left;
+  margin-bottom: 1px;
+}
+.payment form #right {
+  width: 47%;
+  float: right;
+  margin-bottom: 1px;
+}
+.payment form p{
+  color:#fff;
+  font-size: 100%;
+  padding: 0px 8px;
+  text-align: center;
+}
+/*order information*/
+.orderinformation {
+  padding: 18px 18px 18px 18px;
+  background-color: black;
+  /*margin: 0 auto;*/
+  width: 48%;
+  /*padding-left: 0px;*/
+  float: right;
+}
+
+.orderinformation ul{
+    list-style-type:none;
+}
+
+.orderinformation li{
+  display:inline;
+  width：100%;
+}
+.orderinformation div{
+border-bottom:1px solid;
+}
+.orderinformation h5{
+
+}
+.orderinformation .productprice{
+  float:right;
+}
+.orderinformation .subtotal{
+  float:right;
+}
+
+.orderinformation .hst{
+  float:right;
+}
+.orderinformation .total{
+font-family:verdana;
+}
+.orderinformation .totalpay{
+  float:right;
+  font-family:verdana;
+}
+    }
+
+
+  </style>
+  </head>
+
+  <body>
+    <div id="menu" class="ui red menu">
+    <div class="ui container">
+    <a class="active item" href="/home"><img src="truck.jpg" alt="HomeIcon" style="max-width:100%;max-height:100%;"></a>
+    <a class="item" href="">Order Now!</a>
+    <a class="item">          
+    <div class="ui search">
+            <div class="ui icon input">
+              <input class="prompt" type="text" placeholder="Search food">
+              <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
+          </div></a>
+    <div class="right menu">
+      <div class="item">
+        Welcome! <%= user.username %>
+      </div>
+      <div class="item">
+        <a class="ui primary button" href="/logout">Log out</a>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    
+<h3 class="care1" style="color:lightblue;"> Please Choose a Payment method :)</h3>
+  <div class= "payment">
+  <div class="cashpay">
+  <h2>Pay by Cash:</h2>
+  <input id="input-button" type="placeorder" value="Place the Order"/>
+  </div>
+  <p sytle="text-align:center;color:white;"> ------------------</p>
+  <form>
+    <div class="form-container">
+        <h2>Pay by Credit Card:</h2>
+        <div class ="billig information">
+          <p>Billing Information:</p>
+      <input id="input-field" type="text" name="billaddress" required="required" autocomplete="on" placeholder="Address"/>
+
+      <input id="left" type="text" name="cityname" required="required" autocomplete="on" placeholder="City"/>
+
+      <input id="right" type="text" name="postalzip" required="required" autocomplete="on" maxlength="6" placeholder="Postal/ZIP code"/>
+      
+      <input id="input-field" type="email" name="email" required="required" autocomplete="on" placeholder="Email"/>
+    </div>
+    <div class="cardinfomation">
+      <p>Card Information:</p>
+      <input id="left" type="text" name="firstname" placeholder="First Name"/>
+      
+      <input id="right" type="text" name="lastname" placeholder="Last Name"/>
+      
+      <input id="input-field" type="text" name="cardnumber" placeholder="Card Number"/>
+     
+      <input id="left" type="text" name="expiredate" placeholder="expiredate: MM / YY"/>
+        
+      <input id="right" type="text" name="cvcnum" placeholder="CCV"/>
+    </div>
+      <input id="input-button" type="placeorder" value="Place the Order"/>
+    </form>
+    </div> <!-- end of form-container -->
+  </div>
+  <div class = "orderinformation" style="background-color:white;">
+    <form style="background-color:white;">
+    <section class="theorder" style="background-color:white;">
+      <div class="ordertable">
+        <h1>The Order</h1>
+      </div> <!-- end of personal-information -->
+      <div id="order">
+                <ul>
+                    <li>
+                        <h5 id="restname" style="text-decoration: underline;">Blue Food Truck</h5>
+                    </li>
+                    </ul>
+                        <ul id="foodul">
+                            <li class="productnum">
+                                1
+                            </li>
+                            <li>
+                             x
+                           </li>
+                            <li class="productname">
+                                Baozi
+                            </li>
+                            <li class="productprice" style="float:right;">
+                                Price: $4.99
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul id="foodul">
+                            <li class="productnum">
+                                2  
+                            </li>
+                            <li>
+                             x
+                           </li>
+                            <li class="productname">
+                                Poutine  
+                            </li>
+                            <li class="productprice" style="float:right;">
+                                Price: $4.00
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul id="foodul">
+                            <li class="productnum">
+                                2  
+                            </li>
+                            <li>
+                             x
+                           </li>
+                            <li class="productname">
+                                Liujinchicken of China
+                            </li>
+                            <li class="productprice">
+                                Price: $13.98
+                            </li>
+                        </ul>
+                    
+                
+              </div>
+              <div id="ordersum">
+                <ul>
+                  <li >
+                          <b>Subtotal</b>
+                            </li>
+                    
+                            <li class="subtotal">
+                                <b>$22.97</b>
+                            </li>
+                </ul>
+                <ul>
+                  <li >
+                          <b>HST(13%)</b>
+                            </li>
+                    
+                            <li class="hst">
+                                <b>$3.5</b>
+                            </li>
+
+                </ul>
+                <ul class="total">
+                  <li >
+                          <b>TOTAL</b>
+                            </li>
+                    
+                            <li class="totalpay">
+                                <b>$26.47</b>
+                            </li>
+                  
+                </ul>
+              </div>
+              </section>
+    </form>
+  
+</div>
+    
+
+    
+    
+    
+  </body>
+</html>
