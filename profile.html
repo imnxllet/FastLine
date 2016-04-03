@@ -53,9 +53,9 @@
 		    <img src="http://semantic-ui.com/images/avatar2/large/elyse.png">
 		  </div>
 		  <div class="content">
-		    <div class="ui center aligned segment"><%= user.username %></div>
+		    <div class="ui red inverted center aligned segment"><%= user.username %></div>
 		             <% if (user.truck.name) { %>
-    <div class="ui center aligned segment">
+    <div class="ui blue center aligned segment">
     	<p>Name: <%= user.truck.name %></p>
     	<p>Address: <%= user.truck.address %></p>
     	<p>Hours of operation: <%= user.truck.hours %></p>
@@ -63,12 +63,12 @@
     	<p>Food type: <%= user.truck.type_of_food %></p>
     </div>
   <% } %>
-		        <a class="ui bottom attached button" href="/profile/edit">
+		        <a class="ui green bottom attached button" href="/profile/edit">
 		       
 			      <i class="add icon"></i>
 			      EDIT
 			    </a>
-			    <a class="ui bottom attached button" href="./history.html">
+			    <a class="ui blue bottom attached button" href="./history.html">
 			      <i class="add icon"></i>
 			      History of Transaction
 			    </a>

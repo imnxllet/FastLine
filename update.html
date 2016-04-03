@@ -30,10 +30,36 @@
 
   </style>
   <script type="text/javascript">
+  $(document).ready(function() {
+    $("#add").click(function() {
+        var intId = $("#buildyourform div").length + 1;
+        var fieldWrapper = $("<div class=\"fieldwrapper\" id=\"field" + intId + "\"/>");
+        var fName = $("<div class=\"ui celled horizontal list\">" + 
+          "<div class=\"item\"><input type=\"text\" placeholder=\"Dish Name\" class=\"ui input\" name=\"field" + intId  + "\"/></div>" +
+          "<div class=\"item\"><input type=\"text\" placeholder=\"Price\" class=\"ui input\" name=\"field" + intId  + "\"/></div>" +
+          "</div>"
+          );
+        //var fType = $("<select class=\"fieldtype\"><option value=\"checkbox\">Checked</option><option value=\"textbox\">Text</option><option value=\"textarea\">Paragraph</option></select>");
+        var removeButton = $("<button type=\"button\" class=\"ui red button\">detele</button><br><br>");
+        removeButton.click(function() {
+            $(this).parent().remove();
+        });
+        fieldWrapper.append(fName);
+        //fieldWrapper.append(fType);
+        fieldWrapper.append(removeButton);
+        $("#buildyourform").prepend(fieldWrapper);
+    });
+        $('.ui.red.button').click(function() {
+            $(this).parent().remove();
+        });
+});
+
+  </script>
+  <script type="text/javascript">
     function show(elementId) { 
      document.getElementById("personal").style.display="none";
      document.getElementById("truck").style.display="none";
-     document.getElementById("menu").style.display="none";
+     //document.getElementById("menu").style.display="none";
      document.getElementById(elementId).style.display="block";
     }
 
@@ -121,74 +147,97 @@
   </div>
 </div>  
 
-<div id ='content'class="ui middle aligned center aligned grid" id="">
-  <div class="column">
-    
-  </div>
+<div class="ui center aligned container">
+  <h1>Edit Your Profile</h1>
+  <div class = 'ui orange big label'><%= user.username %></div>
+  <hr>
+  <% if (message.length > 0) { %>
+          <div class="ui green message"><%= message %></div>
+        <% } %>
 </div>
 
-  <div class="ui  center aligned grid" id="">
-  <div class="ui center aligned segment">
-    <h1>Edit Your Profile</h1>
-    <div class = 'ui orange big label'><%= user.username %></div>
-    <hr>
-    <h3>Account Info</h3>
-    <% if (message.length > 0) { %>
-    <div class="ui green message"><%= message %></div>
-  <% } %>
-    <button type="button" class='ui teal button' onclick="show('personal')">Edit</button>
-    <div class="personalinfo" id="personal"  style="display:none">
-    		<form class="ui form" action='/update-customer' method='POST'>
-          <div class="field">
-            <label>Password(At least 6 characters)</label>
-            <input type="text" name="password" placeholder="Your Password">
-          </div>
-          <input class="ui blue button" type="submit" value='Save'></input>
-
-        </form>
+<div class="ui grid">
+  <div class="two column row">
+    <div class="column">
+      <div class="ui center aligned segment">
+        <h3>Account Info</h3>
+        <button type="button" class='ui teal button' onclick="show('personal')">Edit</button>
+        <div class="personalinfo" id="personal"  style="display:none">
+      		<form class="ui form" action='/update-customer' method='POST'>
+            <div class="field">
+              <label>Password(At least 6 characters)</label>
+              <input type="text" name="password" placeholder="Your Password">
+            </div>
+            <input class="ui blue button" type="submit" value='Save'></input>
+          </form>
+        </div>
+        <h3>Truck Info</h3>
+        <button type="button" class='ui teal button' onclick="show('truck')">Edit</button>
+        <div class="truckinfo" id="truck"  style="display:none">
+            <form class="ui form" action='/update-seller' method='POST'>
+              <div class="field">
+                <label>Food Truck Name</label>
+                <input type="text" name="name" value='<%= user.truck.name %>'>
+              </div>
+               <div class="field">
+                <label>Address</label>
+                <input type="text" name="address" value='<%= user.truck.address %>'>
+              </div>
+              <div class="field">
+                <label>Hours of Operation</label>
+                <input type="text" name="hour" value='<%= user.truck.hours %>'>
+              </div>
+              <div class="field">
+                <label>Phone</label>
+                <input type="text" name="phone" value='<%= user.truck.phone %>'>
+              </div>
+              <div class="field">
+                <label>Type of food</label>
+                <input type="text" name="type" value='<%= user.truck.type_of_food %>'>
+              </div>
+              <div class="ui error message"></div>
+                <!-- show any messages that come back with authentication -->
+        		  <input class="ui blue button" type="submit" value='Save'></input>
+            </form>
+        </div>
+      </div>
     </div>
-    <h3>Truck Info</h3>
-    <button type="button" class='ui teal button' onclick="show('truck')">Edit</button>
-    <div class="truckinfo" id="truck"  style="display:none">
-        <form class="ui form" action='/signup-seller' method='POST'>
-          <div class="field">
-            <label>Food Truck Name</label>
-            <input type="text" name="name" placeholder="Name of the truck">
-          </div>
-           <div class="field">
-            <label>Address</label>
-            <input type="text" name="address" placeholder="e.g. In from of RB">
-          </div>
-          <div class="field">
-            <label>Hours of Operation</label>
-            <input type="text" name="hour" placeholder="e.g. 9AM - 10 PM">
-          </div>
-          <div class="field">
-            <label>Phone</label>
-            <input type="text" name="phone" placeholder="e.g. 6478888888">
-          </div>
-          <div class="field">
-            <label>Type of food</label>
-            <input type="text" name="type" placeholder="e.g. Chinese, Japanese....">
-          </div>
-          <div class="ui error message"></div>
-            <!-- show any messages that come back with authentication -->
-       
+  
 
-    		  <input class="ui blue button" type="submit" value='Save'></input>
-        </form>
-    </div>
+
+    <div class="column">
+      <div class="ui center aligned segment">
         <h3>Menu</h3>
         <button type ="button" class='ui teal button' onclick="show('menu')">Edit</button>
         <div class="menu" id="menu"  style="display:none">
-        <form class="ui form" action='/signup-seller' method='POST'>
-          <input type='button' value='Add' id='add'>
-          <input type='button' value='Remove' id='remove'>
-          <input class="ui blue button" type="submit" value='Save'></input>
-        </form>
+         
+
+            
+            </br>
+            <input type="button" value="Add a dish" class="ui small orange button" id="add" />
+           
+           <form class="ui container" id="buildyourform" action="/update-menu" method="POST">
+             <h class='ui center aligned teal header'>Current Menu:</h>
+             <% for(var i=0; i<user.truck.menu.length; i++) {%>
+                <div class="fieldwrapper" id="field" + intId + "\">
+                  <div class="ui celled horizontal list">
+                    <div class="item"><input type="text" name='dish<%= i %>' class="ui input" value='<%= user.truck.menu[i].food %>'></div>
+                    <div class="item"><input type="text" name='dish<%= i %>' class="ui input" value='<%= user.truck.menu[i].price %>'></div>
+                  </div>
+                  <button type="button" class="ui red button">detele</button>
+                  <br><br>        
+                </div>
+
+            <% } %>
+              <br><br>  
+              <input class="ui blue button" type="submit" value='Save'></input>
+          </form>
+
         </div>
+      </div>
     </div>
-</div>	</div>
+  </div>
+</div>  
 
 
 

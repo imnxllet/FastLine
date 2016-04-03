@@ -167,14 +167,19 @@ $(document).ready(function(){
           </div>
         </div></div>
            
-      
-        <div class="item">
-          <div class="ui celled horizontal list">
-            <div class="item"><input class="quantity" type='number' size='100' name='mynumber' value='0' /></div>
-            <div class="item">Chicken Fried Rice</div>
-            <div class="item">$7</div>
-          </div>         
-        </div>             
+        <% for(var i=0; i<truck.truck.menu.length; i++) {%>
+          <div class="ui item">
+               <div class="item">
+                  <div class="ui celled horizontal list">
+                    <div class="item"><input class="quantity" type='number' size='100' name='mynumber' value='0' />
+                    </div>
+                    <div class="item"><%= truck.truck.menu[i].food%></div>
+                    <div class="item"><%= truck.truck.menu[i].price%></div>
+                  </div>         
+                </div>
+              </div>     
+        <% } %>
+             
         
         
         </div>        

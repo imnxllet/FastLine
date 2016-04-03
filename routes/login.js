@@ -96,6 +96,63 @@ router.post('/update-customer', isLoggedIn, function(req, res){
 	res.redirect('/profile/edit');
 });
 
+router.post('/update-seller', isLoggedIn, function(req, res){
+	var user_to_update = req.user;
+
+	console.log(req.body);
+    user_to_update.truck.name = req.body.name;
+    user_to_update.truck.address = req.body.address;
+    user_to_update.truck.hours = req.body.hour;
+    user_to_update.truck.phone = req.body.phone;
+    user_to_update.truck.type_of_food = req.body.type;
+	
+	user_to_update.save(function(err){
+		if(err)
+			throw err;
+		return;
+	});
+
+	console.log('user modified!');
+	req.flash('updateMessage', 'User info Updated!');
+	res.redirect('/profile/edit');
+});
+
+router.post('/update-menu', isLoggedIn, function(req, res){
+	//var user_to_update = req.user;
+	//console.log(req.user);
+	var menu = [];
+	User.findOne({'username': req.user.username}, function(err, user_to_update) {
+	    if (err) {
+	      res.status(500).send(err);
+	      console.log(err);
+	      return;
+	    }
+	    if (!user_to_update) {
+	      res.status(404).send('Not found.');
+	      return;
+	    }
+		for(var param in req.body){
+		//var menu = JSON.stringify(req.body[param]).split(",");
+    	var menuitem = {};
+    	menuitem.food = req.body[param][0];
+    	menuitem.price = req.body[param][1];
+    	//console.log(menuitem);
+    	menu.push(menuitem);
+	    }
+	    console.log(menu);
+	    user_to_update.truck.menu = menu;
+	    user_to_update.save(function(err){
+			if(err)
+				throw err;
+			return;
+		});
+
+	    console.log('user\'s menu updated!');
+	    req.flash('updateMessage', 'Menu updated!');
+	    res.redirect('/profile/edit');
+	});		
+});
+
 router.get('/trucklist', isLoggedIn, function(req, res){
 	//Find all books.
 	User.find({'truck.name': {$exists: true}},function(err, trucks) {
