@@ -18,15 +18,9 @@ $(document).ready(function(){
   $('.top.menu .item').tab();
   $('.demo.menu .item').tab();
   $('#pay1').click(function(){
-    alert("Order has been received! Wait 5 Min!");
-    window.location.href = "./index.html";
+    $("#menuform").submit();
   });
-    $('#pay2').click(function(){
-    alert("Order has been received! Wait 5 Min!");
-    window.location.href = "./index.html";
-  });
-  }
-);
+});
 </script>
 <style media="screen" type="text/css">
 
@@ -143,12 +137,12 @@ $(document).ready(function(){
       
       <div class="ui tab segment" data-tab="third">
 
-        <img class="ui small image"src="./map.jpg"/>
+        <img class="ui small image"src="/map.jpg"/>
       </div>
     </div>
 
     </div>
-
+    
     <div class="column">
 
       <div class="ui list">
@@ -166,33 +160,45 @@ $(document).ready(function(){
             <div class="item"><h5 class="ui red header">Price</h5></div>
           </div>
         </div></div>
-           
+         
+          <div class='ui center aligned segment'> 
+          <form id='menuform' class="ui form" action='/pay/<%= truck.truck.name%>' method="POST">
         <% for(var i=0; i<truck.truck.menu.length; i++) {%>
           <div class="ui item">
                <div class="item">
                   <div class="ui celled horizontal list">
-                    <div class="item"><input class="quantity" type='number' size='100' name='mynumber' value='0' />
+                    <div class="item"><input class="ui mini input" type='number' size='100' name='dish<%= i %>' placeholder='Quantity'/>
                     </div>
-                    <div class="item"><%= truck.truck.menu[i].food%></div>
-                    <div class="item"><%= truck.truck.menu[i].price%></div>
+                    <div class="item">
+                      <input name='dish<%= i %>' type='hidden' value='<%= truck.truck.menu[i].food%>'/>
+                      <p class='ui huge red header'><%= truck.truck.menu[i].food%></p>
+                    </div>
+                    <div class="item">
+                      <input name='dish<%= i %>' type='hidden' value='<%= truck.truck.menu[i].price%>'/>
+                      <p class='ui big teal header'><%= truck.truck.menu[i].price%></p>
+                    </div>
                   </div>         
                 </div>
               </div>     
         <% } %>
-             
+        </form>
+        </div>     
         
         
         </div>        
       </div>
 
 
-    <div class="column">
+    <div class="center aligned column">
   <button id="pay1" class="massive ui green button">
     Pay Now
   </button>
-
+  <% if (message.length > 0) { %>
+    <div class="ui red message"><%= message %></div>
+  <% } %>
 
   </div>
+
 </div>
 
 

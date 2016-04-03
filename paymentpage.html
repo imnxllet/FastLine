@@ -157,17 +157,16 @@ $(document).ready(function(){
     <div class="ui segment">
                     <table class="ui table">
                       <thead>
-                            <tr><th>Your Order</th><th>Price</th></tr>
+                            <tr><th>Your Order</th><th>Price</th><th>Quantity</th></tr>
                         </thead>
                         <tfoot>
-                            <tr><th colspan="2" class='ui center green aligned header'>Total <span class="checkout__total">$56.20</span></th></tr>
+                            <tr><th colspan="3" class='ui center green aligned header'>Total <span class="checkout__total">
+                            $<%= orders.total%>
+                            </span></th></tr>
                         </tfoot>
                         <tbody>
-                        <tr><td><strong class="ui red header">Imitations</strong> </td><td>$9.90</td></tr>
-                        <tr><td><strong class="ui red header">In The Silence</strong> </td><td>$5.50</td></tr>
-                        <tr><td><strong class="ui red header">Out Of Exile</strong> </td><td>$11.00</td></tr>
-                        <tr><td><strong class="ui red header">London</strong></td><td>$19.90</td></tr>
-                        <tr><td><strong class="ui red header">Cure For Pain</strong> </td><td>$9.90</td></tr>
+                        <% for(var i=0; i<orders.order.length; i++) {%>                         <tr><td><strong class="ui red header"><%= orders.order[i].food %></strong> </td><td>$<%= orders.order[i].price %></td><td><%= orders.order[i].quantity %></td></tr>                                                      <% } %>
+
                       </tbody>
                     </table><!-- /checkout__summary -->
 

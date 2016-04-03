@@ -67,6 +67,11 @@ router.get('/profile', isLoggedIn, function(req, res){
 		res.render('profile.html', { user: req.user });
 	});
 
+router.get('/orders', isLoggedIn, function(req, res){
+	console.log(req.user.orders);
+		res.render('history.html', { user: req.user });
+	});
+
 router.get('/profile/edit', isLoggedIn, function(req, res){
 	if(!req.user.truck.name){
 		res.render('edit.html', { user: req.user,message: req.flash('updateMessage')});
@@ -185,7 +190,7 @@ router.get('/menu/:name', isLoggedIn, function(req, res){
 
     // If found, we return the info.
     //console.log(truck); 
-    res.render('menu.html', { user: req.user, truck: truck});
+    res.render('menu.html', { user: req.user, truck: truck, message: req.flash('Message')});
   });
 });
 
@@ -222,6 +227,72 @@ router.post('/addcomment/:name', isLoggedIn, function(req, res){
 	}
 	});
 
+router.post('/pay/:name', isLoggedIn, function(req, res){
+	var orders = {};
+	var truckname = req.params.name;
+	orders.truck = truckname;
+	orders.date = Date.now();
+	orders.order = [];
+	orders.total = 0;
+	
+    
+    User.findOne({'truck.name': truckname}, function(err, truck) {
+    if (err) {
+      res.status(500).send(err);
+      console.log(err);
+      return;
+    }
+
+    // If the book is not found, we return 404.
+    if (!truck) {
+      res.status(404).send('Not found.');
+      return;
+    }
+     for(var param in req.body){
+		//var menu = JSON.stringify(req.body[param]).split(",");
+		if(req.body[param][0] != 0){
+	    	var oneOrder = {};
+	    	oneOrder.quantity = req.body[param][0];
+	    	oneOrder.food = req.body[param][1];
+	    	oneOrder.price = Number(req.body[param][2]);
+	    	orders.order.push(oneOrder);
+	    }
+	}
+	    console.log(orders);
+        if(orders.order.length != 0){
+        	console.log("There is order!!");
+
+
+		    
+
+			var total = 0;
+			for(i=0;i<orders.order.length;i++){
+				total = total + orders.order[i].price * orders.order[i].quantity;
+			}
+            orders.total = total;
+            truck.orders.push(orders);
+		    req.user.orders.push(orders);
+            truck.save(function(err){
+				if(err)
+					throw err;
+				return;
+			});
+			req.user.save(function(err){
+				if(err)
+					throw err;
+				return;
+			});
+            console.log(orders);
+	        console.log('Order cretaed!');
+	        res.render('paymentpage.html', { user: req.user, orders: orders});
+	    }else{
+	    	console.log("There is no order!!");
+	    	req.flash('Message', 'Please choose your quantity!')
+	    	res.redirect('/menu/' + truckname);
+	    }    
+  });
+	
+});
 
 function isLoggedIn(req, res, next) {
 	if(req.isAuthenticated()){
