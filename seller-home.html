@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Standard Meta -->
+  <meta charset="utf-8" />
+  <meta http-equiv="refresh" content="5" >
+
+  <!-- Site Properties -->
+  <title>Home</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<link rel="stylesheet" href="http://semantic-ui.com/dist/semantic.min.css"/>
+<script src="http://semantic-ui.com/dist/semantic.min.js"></script>
+<script src="http://patrickgawron.com/wp/wp-content/uploads/2013/11/jquery.address.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.ui.star.rating').rating();
+  $('.top.menu .item').tab();
+  $('.demo.menu .item').tab();
+  $('#pay1').click(function(){
+    alert("Order has been received! Wait 5 Min!");
+    window.location.href = "./index.html";
+  });
+    $('#pay2').click(function(){
+    alert("Order has been received! Wait 5 Min!");
+    window.location.href = "./index.html";
+  });
+  }
+);
+</script>
+  <link rel="stylesheet" href="css/stylepayment.css">
+<style media="screen" type="text/css">
+
+.quantity{
+ width: 60px;
+}
+.ui.menu{
+  height:40px;
+}
+
+#orders{
+  width: 2000px;
+}
+
+#others{
+  max-width: 400px;
+}
+
+</style>
+</head>
+
+
+<body style="margin:10px 40px 0 40px;">
+<div id="menu" class="ui red menu">
+  <div class="ui container">
+    <a class="active item" href="/home">Home</a>
+    <a class="item" href="/profile">Profile</a>
+    <a class="item">          
+    <div class="ui search">
+            <div class="ui icon input">
+              <input class="prompt" type="text" placeholder="Search orders">
+              <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
+          </div></a>
+    <div class="right menu">
+    <div class="item">
+        Welcome! <%= user.username %>
+      </div>
+      <div class="item">
+        <a class="ui primary button" href="/logout">Log out</a>
+      </div>
+    </div>
+  </div>
+</div>  
+
+
+
+<div class="ui grid">
+  <div class="two column row">
+
+    <div class="column" id="others">
+        <div id="card" class="ui centered card">
+              <div class="image">
+                <img src="http://semantic-ui.com/images/avatar2/large/elyse.png">
+              </div>
+              <div class="content">
+                <div class="ui red inverted center aligned segment"><%= user.username %></div>
+                  <a class="ui green bottom attached button" href="/profile/edit">
+                    <i class="add icon"></i>
+                    Edit Profile
+                  </a>
+                  <a class="ui blue bottom attached button" href="/orders">
+                    <i class="add icon"></i>
+                      Edit Menu
+                  </a>
+                  <a class="ui blue bottom attached button" href="/orders">
+                    <i class="add icon"></i>
+                      History of Transaction
+                  </a>
+              </div>
+      </div>
+      </div>
+
+    <div class="column" id="orders">
+    <div class="ui center aligned segment">
+      <h class='ui big orange header'>ORDER<%= i + 1%></h><br>
+          <h class='ui small blue header'><%= user.orders[i].date.toString()%></h>
+                    <table class="ui table">
+                      <thead>
+                            <tr><th>Order</th><th>Price</th><th>Quantity</th></tr>
+                        </thead>
+                        <tfoot>
+                            <tr><th colspan="3" class='ui center green aligned header'>Total <span class="checkout__total">
+                            $<%= user.orders[i].total %>
+                            </span></th></tr>
+                        </tfoot>
+                        <tbody>
+                        <% for(var j=0; j<user.orders[i].order.length; j++) {%>                        <tr><td><strong class="ui red header"><%= user.orders[i].order[j].food %></strong> </td><td>$<%= user.orders[i].order[j].price %></td><td>$<%= user.orders[i].order[j].quantity %></td></tr>                                                      <% } %>
+
+                      </tbody>
+                    </table><!-- /checkout__summary -->
+
+   </div>
+  </div>
+
+
+
+</body>
+
+</html>
