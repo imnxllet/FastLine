@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Thank You</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<link rel="stylesheet" href="http://semantic-ui.com/dist/semantic.min.css"/>
+<script src="http://semantic-ui.com/dist/semantic.min.js"></script>
+<script src="http://patrickgawron.com/wp/wp-content/uploads/2013/11/jquery.address.js"></script>
+</head>
+<body>
+<div id="menu" class="ui red menu">
+  <div class="ui container">
+    <a class="active item" href="/home">Home</a>
+    <a class="item" href="/profile">Profile</a>
+    <a class="item" href="/trucklist">Order now!</a>
+    <a class="item">          <div class="ui search">
+            <div class="ui icon input">
+              <input class="prompt" type="text" placeholder="Search food">
+              <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
+          </div></a>
+    <div class="right menu">
+    <div class="item">
+        Welcome! <%= user.username %>
+      </div>
+      <div class="item">
+        <a class="ui primary button" href="/logout">Log out</a>
+      </div>
+    </div>
+  </div>
+</div>  
+
+<div class="ui massive green message center aligned segment">
+<br>
+<h1>Thank you for your order!</h1>
+<br>
+<h2 style="color:black">Your order number is</h2>
+<p>order number</p>
+<br>
+<button class="ui big green button" href="/home">Back To Home</button>
+</div>
+
+
+
+</body>
+</html>
