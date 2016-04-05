@@ -51,8 +51,10 @@
  <% for(var i=0; i<user.orders.length; i++) {%>
 
      <div class="column">
-     <h class='ui big orange header'>ORDER<%= i + 1%></h><br>
- <h class='ui small blue header'><%= user.orders[i].date.toString()%></h>
+     <h class='ui big orange header'>ORDER# <%= i + 1%></h><br>
+ <h class='ui small blue header'><%= user.orders[i].date.toString()%></h><br>
+ <h class='ui small green header'>Order ref <%= user.orders[i].number %></h><br>
+ <h class='ui small red header'>Order at <%= user.orders[i].truck %></h><br>
                     <table class="ui table">
                       <thead>
                             <tr><th>Your Order</th><th>Price</th><th>Quantity</th></tr>
@@ -63,7 +65,7 @@
                             </span></th></tr>
                         </tfoot>
                         <tbody>
-                        <% for(var j=0; j<user.orders[i].order.length; j++) {%>                        <tr><td><strong class="ui red header"><%= user.orders[i].order[j].food %></strong> </td><td>$<%= user.orders[i].order[j].price %></td><td>$<%= user.orders[i].order[j].quantity %></td></tr>                                                      <% } %>
+                        <% for(var j=0; j<user.orders[i].order.length; j++) {%>                        <tr><td><strong class="ui red header"><%= user.orders[i].order[j].food %></strong> </td><td>$<%= user.orders[i].order[j].price %></td><td><%= user.orders[i].order[j].quantity %></td></tr>                                                      <% } %>
 
                       </tbody>
                     </table><!-- /checkout__summary -->

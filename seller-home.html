@@ -54,7 +54,7 @@ $(document).ready(function(){
 <div id="menu" class="ui red menu">
   <div class="ui container">
     <a class="active item" href="/home">Home</a>
-    <a class="item" href="/profile">Profile</a>
+    <a class="item" href="/sellerpage/<%= user.truck.name %>">Your Page</a>
     <a class="item">          
     <div class="ui search">
             <div class="ui icon input">
@@ -88,11 +88,7 @@ $(document).ready(function(){
                 <div class="ui red inverted center aligned segment"><%= user.username %></div>
                   <a class="ui green bottom attached button" href="/profile/edit">
                     <i class="add icon"></i>
-                    Edit Profile
-                  </a>
-                  <a class="ui blue bottom attached button" href="/orders">
-                    <i class="add icon"></i>
-                      Edit Menu
+                    Edit Profile/Menu
                   </a>
                   <a class="ui blue bottom attached button" href="/orders">
                     <i class="add icon"></i>
@@ -103,6 +99,7 @@ $(document).ready(function(){
       </div>
 
     <div class="column" id="orders">
+<<<<<<< Updated upstream
     <div class="ui center aligned segment">
       <h class='ui big orange header'>ORDER<%= i + 1%></h><br>
           <h class='ui small blue header'><%= user.orders[i].date.toString()%></h>
@@ -110,9 +107,17 @@ $(document).ready(function(){
           <h class="ui small black header">Name: USERNAME</h>
           <br>
           <h class="ui small black header">Order Number: RFJARFRV</h>
+=======
+<% for(var i=user.orders.length -1; i>=0; i--) {%>
+
+     <div class="ui segment">
+     <h class='ui big orange header'>ORDER<%= i + 1%></h><br>
+ <h class='ui small blue header'><%= user.orders[i].date.toString()%></h><br>
+ <h class='ui small green header'>Order ref <%= user.orders[i].number %></h>
+>>>>>>> Stashed changes
                     <table class="ui table">
                       <thead>
-                            <tr><th>Order</th><th>Price</th><th>Quantity</th></tr>
+                            <tr><th>Your Order</th><th>Price</th><th>Quantity</th></tr>
                         </thead>
                         <tfoot>
                             <tr><th colspan="3" class='ui center green aligned header'>Total <span class="checkout__total">
@@ -120,12 +125,13 @@ $(document).ready(function(){
                             </span></th></tr>
                         </tfoot>
                         <tbody>
-                        <% for(var j=0; j<user.orders[i].order.length; j++) {%>                        <tr><td><strong class="ui red header"><%= user.orders[i].order[j].food %></strong> </td><td>$<%= user.orders[i].order[j].price %></td><td>$<%= user.orders[i].order[j].quantity %></td></tr>                                                      <% } %>
+                        <% for(var j=0; j<user.orders[i].order.length; j++) {%>                        <tr><td><strong class="ui red header"><%= user.orders[i].order[j].food %></strong> </td><td>$<%= user.orders[i].order[j].price %></td><td><%= user.orders[i].order[j].quantity %></td></tr>                                                      <% } %>
 
                       </tbody>
                     </table><!-- /checkout__summary -->
 
-   </div>
+    </div>   
+ <% } %>
   </div>
 
 

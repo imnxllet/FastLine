@@ -74,107 +74,13 @@ $(document).ready(function(){
 <div class="ui grid">
   <div class="two column row">
     
-    <div class="column">
-      <div class="ui segment">
-        <h3 class="care1" style="color: darkblue;"> Please Choose a Payment method :)</h3>
 
-        <div class= "payment">
-          <div class="ui green segment">
-            <h2>Pay by Cash:</h2>
-            <button class="ui big green button">Place Order</button>
-          </div>
-
-
-           <div class="ui red segment">
-            <form class="ui form">
-              <div class="form-container">
-                  <h2>Pay by Credit Card:</h2>
-                  <div class ="billig information">
-                    <p>Billing Information:</p>
-                <input id="input-field" type="text" name="billaddress" required="required" autocomplete="on" placeholder="Address"/>
-
-                <input id="left" type="text" name="cityname" required="required" autocomplete="on" placeholder="City"/>
-
-                <input id="right" type="text" name="postalzip" required="required" autocomplete="on" maxlength="6" placeholder="Postal/ZIP code"/>
-                
-                <input id="input-field" type="email" name="email" required="required" autocomplete="on" placeholder="Email"/>
-              </div>
-          <h4 class="ui dividing header">Billing Information</h4>
-            <div class="field">
-              <label>Card Type</label>
-              <select class="ui fluid dropdown">
-                  <option value="">Card Type</option>
-              <option value="AL">American Express</option>
-              <option value="AK">Visa</option>
-              <option value="AZ">Master Card</option>
-
-                </select>
-            </div>
-            <div class="fields">
-              <div class="seven wide field">
-                <label>Card Number</label>
-                <input type="text" name="card[number]" maxlength="16" placeholder="Card #">
-              </div>
-              <div class="three wide field">
-                <label>CVC</label>
-                <input type="text" name="card[cvc]" maxlength="3" placeholder="CVC">
-              </div>
-              <div class="six wide field">
-                <label>Expiration</label>
-                <div class="two fields">
-                  <div class="field">
-                    <select class="ui fluid search dropdown" name="card[expire-month]">
-                      <option value="">Month</option>
-                      <option value="1">January</option>
-                      <option value="2">February</option>
-                      <option value="3">March</option>
-                      <option value="4">April</option>
-                      <option value="5">May</option>
-                      <option value="6">June</option>
-                      <option value="7">July</option>
-                      <option value="8">August</option>
-                      <option value="9">September</option>
-                      <option value="10">October</option>
-                      <option value="11">November</option>
-                      <option value="12">December</option>
-                    </select>
-                  </div>
-                  <div class="field">
-                    <input type="text" name="card[expire-year]" maxlength="4" placeholder="Year">
-                  </div>
-                </div>
-              </div>
-            </div>
-                <button class="ui big red button">Place Order</button>
-              </form>
-              </div> <!-- end of form-container -->
-            </div>
-      </div>
-    </div>
 </div>
 
 
 
 
-  <div class="column">
-    <div class="ui segment">
-                    <table class="ui table">
-                      <thead>
-                            <tr><th>Your Order</th><th>Price</th><th>Quantity</th></tr>
-                        </thead>
-                        <tfoot>
-                            <tr><th colspan="3" class='ui center green aligned header'>Total <span class="checkout__total">
-                            $<%= orders.total%>
-                            </span></th></tr>
-                        </tfoot>
-                        <tbody>
-                        <% for(var i=0; i<orders.order.length; i++) {%>                         <tr><td><strong class="ui red header"><%= orders.order[i].food %></strong> </td><td>$<%= orders.order[i].price %></td><td><%= orders.order[i].quantity %></td></tr>                                                      <% } %>
 
-                      </tbody>
-                    </table><!-- /checkout__summary -->
-
-    </div>      
-  </div>
 
 </div>
 

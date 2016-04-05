@@ -2,11 +2,15 @@ var express = require('express');
 var router = express.Router();
 var User = require('./User.js');
 var passport = require('passport');
+var session = require('express-session');
 require('../config/passport.js')(passport)
 
+router.use(session({secret: 'anystringoftext',
+				 saveUninitialized: true,
+				 resave: true}));
 /*Get home page.*/
-router.get('/', function(req, res){
-  res.render('login.html', { message: req.flash('loginMessage')});
+router.get('/', isLoggedIn,function(req, res){
+  res.redirect('/home');
 });
 
 router.get('/truck.jpg', function(req, res) {
@@ -42,7 +46,7 @@ router.post('/signup-seller', passport.authenticate('local-signup-seller', {
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at
 //     /auth/facebook/callback
-router.get('/auth/facebook', passport.authenticate('facebook'));
+router.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email' ] }));
 
 // Facebook will redirect the user to this URL after approval.  Finish the
 // authentication process by attempting to obtain an access token.  If
@@ -54,7 +58,11 @@ router.get('/auth/facebook/callback',
 
 
 router.get('/home', isLoggedIn, function(req, res){
+	if(!req.user.truck.name){
 		res.render('index.html', { user: req.user });
+	}else{
+		res.render('seller-home.html', { user: req.user });
+	}
 	});
  //res.send('Username '+ username+ ' password '+ password);
 
@@ -194,6 +202,27 @@ router.get('/menu/:name', isLoggedIn, function(req, res){
   });
 });
 
+router.get('/sellerpage/:name', isLoggedIn, function(req, res){
+   var truckname = req.params.name;
+   User.findOne({'truck.name': truckname}, function(err, truck) {
+    if (err) {
+      res.status(500).send(err);
+      console.log(err);
+      return;
+    }
+
+    // If the book is not found, we return 404.
+    if (!truck) {
+      res.status(404).send('Not found.');
+      return;
+    }
+
+    // If found, we return the info.
+    //console.log(truck); 
+    res.render('sellerpage.html', { user: req.user, truck: truck, message: req.flash('Message')});
+  });
+});
+
 router.post('/addcomment/:name', isLoggedIn, function(req, res){
     var truckname = req.params.name;
     console.log(truckname);
@@ -208,8 +237,15 @@ router.post('/addcomment/:name', isLoggedIn, function(req, res){
 		      res.status(404).send('Not found.');
 		      return;
 		    }
-
-		    var comment = {user: req.user.username, body: req.body.comment, date: Date.now()};	
+            
+		    var comment = {};
+            if(!req.user.truck.name){
+                comment = {user: req.user.username, body: req.body.comment, date: Date.now()};
+            }else{
+            	comment = {user: req.user.truck.name, body: req.body.comment, date: Date.now()};
+            }
+		    	
+			
 			truck.truck.comments.push(comment);
 			truck.save(function(err){
 				if(err)
@@ -234,6 +270,7 @@ router.post('/pay/:name', isLoggedIn, function(req, res){
 	orders.date = Date.now();
 	orders.order = [];
 	orders.total = 0;
+	orders.number = 0;
 	
     
     User.findOne({'truck.name': truckname}, function(err, truck) {
@@ -270,6 +307,7 @@ router.post('/pay/:name', isLoggedIn, function(req, res){
 				total = total + orders.order[i].price * orders.order[i].quantity;
 			}
             orders.total = total;
+            orders.number = truck.orders.length + 1;
             truck.orders.push(orders);
 		    req.user.orders.push(orders);
             truck.save(function(err){
@@ -284,7 +322,7 @@ router.post('/pay/:name', isLoggedIn, function(req, res){
 			});
             console.log(orders);
 	        console.log('Order cretaed!');
-	        res.render('paymentpage.html', { user: req.user, orders: orders});
+	        res.render('thankyou.html', { user: req.user, orders: orders});
 	    }else{
 	    	console.log("There is no order!!");
 	    	req.flash('Message', 'Please choose your quantity!')
@@ -297,10 +335,11 @@ router.post('/pay/:name', isLoggedIn, function(req, res){
 function isLoggedIn(req, res, next) {
 	if(req.isAuthenticated()){
 		console.log('is logged in!');
+		//res.redirect('/home');
 		return next();
 	}
     console.log('is not logged in!');
-	res.redirect('/');
+	res.render('login.html', { message: req.flash('loginMessage')});
 }
 
 function turnTruckstoHtmlList(trucklist){

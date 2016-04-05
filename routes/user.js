@@ -17,7 +17,7 @@ db.once('open', function callback () {
 var userSchema = new Schema({
   username:  String,
   password: String,
-  orders: [{truck: String, order: [{quantity: Number, food: String, price: Number}], date: Date, total:Number}],
+  orders: [{truck: String, order: [{quantity: Number, food: String, price: Number}], date: Date, total:Number, number: Number}],
   facebook: {
     id: String,
   },
