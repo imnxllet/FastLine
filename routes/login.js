@@ -13,6 +13,7 @@ router.get('/', isLoggedIn,function(req, res){
   res.redirect('/home');
 });
 
+
 router.get('/truck.jpg', function(req, res) {
   res.sendFile('truck.jpg');
 });
@@ -65,6 +66,7 @@ router.get('/home', isLoggedIn, function(req, res){
 	}
 	});
  //res.send('Username '+ username+ ' password '+ password);
+
 
 router.get('/logout', function(req, res){
 	req.logout();
@@ -202,6 +204,8 @@ router.get('/menu/:name', isLoggedIn, function(req, res){
   });
 });
 
+
+
 router.get('/sellerpage/:name', isLoggedIn, function(req, res){
    var truckname = req.params.name;
    User.findOne({'truck.name': truckname}, function(err, truck) {
@@ -297,10 +301,7 @@ router.post('/pay/:name', isLoggedIn, function(req, res){
 	}
 	    console.log(orders);
         if(orders.order.length != 0){
-        	console.log("There is order!!");
-
-
-		    
+        	console.log("There is order!!");  
 
 			var total = 0;
 			for(i=0;i<orders.order.length;i++){
@@ -322,13 +323,37 @@ router.post('/pay/:name', isLoggedIn, function(req, res){
 			});
             console.log(orders);
 	        console.log('Order cretaed!');
-	        res.render('thankyou.html', { user: req.user, orders: orders});
+	        res.redirect('/thankyou/' + req.user.username);
 	    }else{
 	    	console.log("There is no order!!");
 	    	req.flash('Message', 'Please choose your quantity!')
 	    	res.redirect('/menu/' + truckname);
 	    }    
   });
+	
+});
+
+router.get('/thankyou/:username', isLoggedIn, function(req, res){
+	var username = req.params.username;
+		User.findOne({'username': username}, function(err, user) {
+	    if (err) {
+	      res.status(500).send(err);
+	      console.log(err);
+	      return;
+	    }
+	    if (!user) {
+	      res.status(404).send('Not found.');
+	      return;
+	    }
+		
+	    user.save(function(err){
+			if(err)
+				throw err;
+			return;
+		});
+        console.log(user);
+		res.render('thankyou.html', { user: user });
+	});	
 	
 });
 
@@ -343,7 +368,7 @@ function isLoggedIn(req, res, next) {
 }
 
 function turnTruckstoHtmlList(trucklist){
-    console.log(trucklist.length);
+    //console.log(trucklist.length);
     var result = [];
     for(i=0;i<trucklist.length;i++){
        result.push(trucklist[i]);
@@ -351,4 +376,103 @@ function turnTruckstoHtmlList(trucklist){
     return result;
   }
 
+router.post('/search', function(req, res){
+	if(!req.body.keyword){
+		//res.redirect("/home");
+		return;
+	}
+	
+	 var word = req.body.keyword.toString().toLowerCase();
+	 console.log(word);
+	 var types = ["chinese", "japanese", "mexican", "italian", "indian","vietnamese","korean","thai","american","turkish","other"];
+	 if(types.indexOf(word) != -1){
+		 User.find({'truck.type_of_food': capitalizeFirstLetter(word)},function(err, trucklist) {
+		      if (err) {
+		        //res.status(500).send(err);
+		        console.log("error!" + err);
+		        return;
+		      }
+		      res.render("search.html", {user: req.user, trucks: trucklist, message:""});
+
+		   });
+	 }else{
+
+
+		 User.find({'truck.name': {$exists: true}},function(err, alltrucks) {
+		      if (err) {
+		        res.status(500).send(err);
+		        console.log(err);
+		        return;
+		      }
+                 	
+		    var resulttrucks = [];
+		    for(i=0; i<alltrucks.length;i++){
+		      //console.log('here');
+		      for(j=0; j<alltrucks[i].truck.menu.length;j++){
+		        console.log(alltrucks[i].truck.menu[j].food);
+		          if(alltrucks[i].truck.menu[j].food.toLowerCase().indexOf(word) != -1){
+		                console.log('There\'s food match!!');
+		                resulttrucks.push(alltrucks[i]);
+		                break;
+		          }
+		      }    
+		    }
+		    if(resulttrucks.length == 0){
+		    	 res.render("search.html", {user: req.user,trucks: resulttrucks,message: "No truck found"});
+		    	}else{
+		    res.render("search.html", {user: req.user,trucks: resulttrucks,message:""});}
+		  });
+	}	 
+});
+
+function findFood(keyword){
+    //var alltrucks = [];
+    var resulttrucks = [];
+    User.find({'truck.name': {$exists: true}},function(err, alltrucks) {
+      if (err) {
+        res.status(500).send(err);
+        console.log(err);
+        return;
+      }
+      //console.log(alltrucks);
+      //console.log(req.params.id);
+      //alltrucks = turnTruckstoHtmlList(trucks);
+   
+    
+    //console.log(alltrucks);
+    for(i=0; i<alltrucks.length;i++){
+    	for(j=0; j<alltrucks[i].truck.menu.length;j++){
+    		console.log(alltrucks[i].truck.menu[j].food);
+    	    if(alltrucks[i].truck.menu[j].food.indexOf(keyword) != -1){
+                console.log('There\'s food match!!');
+                resulttrucks.push(alltrucks[i]);
+                //break;
+    	    }
+    	}    
+    }
+    console.log(resulttrucks.unique());
+    console.log('-------------');
+    var result =[];
+    result.concat(resulttrucks.unique());
+
+    return result;
+  });  
+}
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+Array.prototype.unique = function() {
+    var a = this.concat();
+    for(var i=0; i<a.length; ++i) {
+        for(var j=i+1; j<a.length; ++j) {
+            if(a[i] === a[j])
+                a.splice(j--, 1);
+        }
+    }
+
+    return a;
+};
+
 module.exports = router;
+

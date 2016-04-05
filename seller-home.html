@@ -99,22 +99,13 @@ $(document).ready(function(){
       </div>
 
     <div class="column" id="orders">
-<<<<<<< Updated upstream
-    <div class="ui center aligned segment">
-      <h class='ui big orange header'>ORDER<%= i + 1%></h><br>
-          <h class='ui small blue header'><%= user.orders[i].date.toString()%></h>
-          <br>
-          <h class="ui small black header">Name: USERNAME</h>
-          <br>
-          <h class="ui small black header">Order Number: RFJARFRV</h>
-=======
+
 <% for(var i=user.orders.length -1; i>=0; i--) {%>
 
      <div class="ui segment">
      <h class='ui big orange header'>ORDER<%= i + 1%></h><br>
  <h class='ui small blue header'><%= user.orders[i].date.toString()%></h><br>
  <h class='ui small green header'>Order ref <%= user.orders[i].number %></h>
->>>>>>> Stashed changes
                     <table class="ui table">
                       <thead>
                             <tr><th>Your Order</th><th>Price</th><th>Quantity</th></tr>

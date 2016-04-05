@@ -192,7 +192,20 @@
               </div>
               <div class="field">
                 <label>Type of food</label>
-                <input type="text" name="type" value='<%= user.truck.type_of_food %>'>
+                          <select class="ui fluid dropdown" name="type">
+              <option value="Chinese">Chinese</option>
+              <option value="Japanese">Japanese</option>
+              <option value="Mexican">Mexican</option>
+               <option value="Italian">Italian</option>
+               <option value="Indian">Indian</option>
+               <option value="Vietnamese">Vietnamese</option>
+               <option value="Korean">Korean</option>
+               <option value="Thai">Thai</option>
+               <option value="American">American</option>
+               <option value="Turkish">Turkish</option>
+               <option value="Other">Other</option>
+
+                </select>
               </div>
               <div class="ui error message"></div>
                 <!-- show any messages that come back with authentication -->

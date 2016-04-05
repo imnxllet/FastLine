@@ -14,36 +14,37 @@
 <script src="http://patrickgawron.com/wp/wp-content/uploads/2013/11/jquery.address.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-  $('.ui.star.rating').rating();
   $('.top.menu .item').tab();
   $('.demo.menu .item').tab();
   $('#button1').click(function(){
     $("#menuform").submit();
   });
   $('#button2').click(function(){
-    /*var re = formcheck();
+    var re = formcheck();
       if (re == true){
+        //alert('good');
         $("#menuform").submit();
         return;
       }else{
-        alert(re);
-        alert('Please provide card informaion!');
+        //alert(re);
+        //alert('Please provide card informaion!');
         return;
-      }*/
-       $("#paymentform").submit();
+      }
   });
 
 
 function formcheck() {
   var result = true;
   var fields = $('#paymentform')
-        .find("select, textarea, input").serializeArray();
+        .find("select, input").serializeArray();
   
   $.each(fields, function(i, field) {
-    if (!field.value)
+    if (!field.value){
+
       alert(field.name + ' is required');
       result = false;
-      //return result; 
+      //alert(result);
+      return result;} 
    }); 
   //alert(fields.toString());
   return result;
@@ -91,7 +92,7 @@ function formcheck() {
 <div class="ui container" >
   <div class="ui relaxed divided items">
     <div class="item">
-      <div class="ui small image">
+      <div class="ui medium image">
         <img src="/white.jpg">
       </div>
       <div class="content">
@@ -102,8 +103,17 @@ function formcheck() {
           Phone: <%= truck.truck.phone %><br>
           Type: <%= truck.truck.type_of_food %>
         </div>
-        <div class="extra">
 
+        <div class="extra">
+          <div class="ui green statistic">
+            <div class="value">
+              <%= truck.orders.length %>
+            </div>
+            <div class="ui green label">
+              Popularity
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     </div>
@@ -149,8 +159,6 @@ function formcheck() {
       </div>
       
       <div class="ui tab segment" data-tab="second">
-        <h4>Rate this food truck:</h4>
-        <div class="ui huge star rating" data-rating="3"></div>
         <h4>Leave a comment:</h4>
         
         <form class="ui reply form" action="/addcomment/<%= truck.truck.name %>" method="POST">
@@ -233,7 +241,7 @@ function formcheck() {
 
 
            <div class="ui red segment">
-            <form class="ui form" id="paymentform">
+            <div class="ui form" id="paymentform">
               <div class="form-container">
                   <h2>Pay by Credit Card:</h2>
                   <div class ="billig information">
@@ -292,8 +300,9 @@ function formcheck() {
                 </div>
               </div>
             </div>
-                <button class="ui big red button" id='button2'>Place Order</button>
-              </form>
+                
+              </div>
+              <button class="ui big red button" id='button2'>Place Order</button>
               </div> <!-- end of form-container -->
             </div>
       </div>
