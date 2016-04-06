@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<!--page for history of orders for both buyer and seller-->
 <html>
 <head>
     <title>
@@ -10,19 +10,13 @@
     <meta name="HandheldFriendly" content="true" />
     <meta charset="UTF-8">
     <style type="text/css">
-      .ui.menu{
-        height:40px;
-      }
       body{
         margin:10px 40px 0 40px;
       }
-      .ui.segment{
-        width:400px;
-      }
-
       </style>
 </head>
 <body style="margin:10px 40px 0 40px;">
+<!--navi bar-->
 <div id="menu" class="ui red menu">
   <div class="ui container">
     <a class="active item" href="/home">Home</a>
@@ -32,7 +26,7 @@
         <% if(!user.truck.name){%>
       <a class="item" href="/trucklist">Order now!</a>
     <% } %>
-  
+            
             <div class="item">
           <form class="ui action input" action='/search' method="POST">
             <input type="text" name='keyword' placeholder="Search food or type">
@@ -59,25 +53,26 @@ No Order History Yet!
     
  <% for(var i=0; i<user.orders.length; i++) {%>
 
+  <!--divs for orders-->
      <div class="column">
      <h class='ui big orange header'>ORDER# <%= i + 1%></h><br>
  <h class='ui small blue header'><%= user.orders[i].date.toString()%></h><br>
  <h class='ui small green header'>Order ref <%= user.orders[i].number %></h><br>
  <h class='ui small red header'>Order at <%= user.orders[i].truck %></h><br>
-                    <table class="ui table">
-                      <thead>
-                            <tr><th>Your Order</th><th>Price</th><th>Quantity</th></tr>
-                        </thead>
-                        <tfoot>
-                            <tr><th colspan="3" class='ui center green aligned header'>Total <span class="checkout__total">
-                            $<%= user.orders[i].total %>
-                            </span></th></tr>
-                        </tfoot>
-                        <tbody>
-                        <% for(var j=0; j<user.orders[i].order.length; j++) {%>                        <tr><td><strong class="ui red header"><%= user.orders[i].order[j].food %></strong> </td><td>$<%= user.orders[i].order[j].price %></td><td><%= user.orders[i].order[j].quantity %></td></tr>                                                      <% } %>
+    <table class="ui table">
+      <thead>
+            <tr><th>Your Order</th><th>Price</th><th>Quantity</th></tr>
+        </thead>
+        <tfoot>
+            <tr><th colspan="3" class='ui center green aligned header'>Total <span class="checkout__total">
+            $<%= user.orders[i].total %>
+            </span></th></tr>
+        </tfoot>
+        <tbody>
+        <% for(var j=0; j<user.orders[i].order.length; j++) {%>                        <tr><td><strong class="ui red header"><%= user.orders[i].order[j].food %></strong> </td><td>$<%= user.orders[i].order[j].price %></td><td><%= user.orders[i].order[j].quantity %></td></tr>                                                      <% } %>
 
-                      </tbody>
-                    </table><!-- /checkout__summary -->
+      </tbody>
+    </table><!-- /checkout__summary -->
 
     </div>   
  <% } %>

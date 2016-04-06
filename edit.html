@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<!--page for editing personal profile for buyers-->
 <html>
 <head>
     <title>
@@ -11,20 +11,14 @@
     <meta name="HandheldFriendly" content="true" />
     <meta charset="UTF-8">
     <style type="text/css">
-      .ui.menu{
-        height:40px;
-      }
       body{
         margin:10px 40px 0 40px;
       }
-      .ui.input{
-        max-width:200px;
-      }
-
       </style>
 
 </head>
 <body>
+<!--navigation bar-->
 <div id="menu" class="ui red menu">
   <div class="ui container">
     <a class="active item" href="/home">Home</a>
@@ -47,14 +41,14 @@
   </div>
 </div>  
  
-
+<!--personal profile-->
 <div class="ui middle aligned center aligned grid">
   <div class="column">
     <h1>Edit your Profile</h1>
     <div class = 'ui orange big label'><%= user.username %></div>
      <br/><br/>
     <form class="ui large form" action='/update-customer' method='POST'>
-
+    <!--section for changing password-->
       <div class="ui stacked segment">
         <div class="field">Change passwords: 
           <div class="ui left icon input">
@@ -70,9 +64,6 @@
     </form>
   </div>
 </div>    
-
-    
-
 
 </div>
 </body>

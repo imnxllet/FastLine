@@ -1,5 +1,5 @@
- 
-<!DOCTYPE html>
+ <!DOCTYPE html>
+<!--page for search results-->
 <html>
 <head>
   <!-- Standard Meta -->
@@ -14,13 +14,6 @@
 <script src="http://semantic-ui.com/dist/semantic.min.js"></script>
 <!--<script src="http://patrickgawron.com/wp/wp-content/uploads/2013/11/jquery.address.js"></script> !-->
 <style type="text/css">
-    #card{
-      margin-top: 100px;
-
-    }
-    .ui.menu{
-    height:40px;
-    }
     body{
       margin:10px 40px 0 40px;
     }
@@ -33,6 +26,7 @@
     </script>
 </head>
 <body>
+<!--navigation bar-->
 <div id="menu" class="ui red menu">
     <div class="ui container">
     <a class="active item" href="/home">Home</a>
@@ -56,19 +50,21 @@
   </div>
 </div>  
 </br></br>
+
+<!--search page-->
 <div class='ui two column centered grid'>
 <div class="ui segment">
 <h class="ui red huge center aligned header"> Search result</h>
 </div>
 </div>
   <div id="body" class="ui vertical stripe segment"><br>
+  <!--show the results of the research-->
   <% if (message) { %>
     <div class="ui massive red message"><p class="ui center aligned container"><%= message %></p></div>
   <% } %>
 </br></br>
     <div id='list' class="ui horizontal list">  
-
-
+<!--displaying results-->
 <% for(var i=0; i<trucks.length; i++) {%>
 <div class="ui item">
 <div class="ui card">

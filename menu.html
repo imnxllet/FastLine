@@ -51,20 +51,11 @@ function formcheck() {
 }
 });
 </script>
-<style media="screen" type="text/css">
-
-.quantity{
- width: 60px;
-}
-.ui.menu{
-  height:40px;
-}
-
-</style>
 </head>
 
 
 <body style="margin:10px 40px 0 40px;">
+<!--nav bar-->
 <div id="menu" class="ui red menu">
   <div class="ui container">
     <a class="active item" href="/home">Home</a>
@@ -94,6 +85,7 @@ function formcheck() {
       <div class="ui medium image">
         <img src="/white.jpg">
       </div>
+      <!--truck profile-->
       <div class="content">
         <h class="ui red huge header"><%= truck.truck.name %></h>
         <div class="description">
@@ -123,13 +115,13 @@ function formcheck() {
 <div class="ui grid">
   <div class="three column row">
     <div class="column">
-
+<!--review section-->
       <div class="ui pointing secondary demo menu">
         <a class="active red item" data-tab="first">Reviews</a>
         <a class="blue item" data-tab="second">Make a comment</a>
         <a class="green item" data-tab="third">Address</a>
       </div>
-
+      <!--comment-->
     <div class="row">
       <div class="ui active tab segment" data-tab="first">
         <div class="ui comments">
@@ -156,7 +148,7 @@ function formcheck() {
   
   </div>
       </div>
-      
+      <!--leave a comment for the truck-->
       <div class="ui tab segment" data-tab="second">
         <h4>Leave a comment:</h4>
         
@@ -169,7 +161,7 @@ function formcheck() {
         
         </form>
       </div>
-      
+      <!--map for the truck-->
       <div class="ui tab segment" data-tab="third">
 
         <a class="ui blue button" href="<%= truck.truck.map%>">Go to Google Map</a>
@@ -179,7 +171,7 @@ function formcheck() {
     </div>
     
     <div class="column">
-
+    <!--menu for the food truck-->
       <div class="ui list">
         <div class=" item">
         <div class="ui right aligned segment">
@@ -228,6 +220,8 @@ function formcheck() {
   <% if (message.length > 0) { %>
     <div class="ui red message"><%= message %></div>
   <% } %>
+
+  <!--payment-->
     <div class="column">
       <div class="ui segment">
         <h3 class="care1" style="color: darkblue;"> Please Choose a Payment method :)</h3>
@@ -310,11 +304,5 @@ function formcheck() {
 
 </div>
 
-
-
-
-
-
 </body>
-
 </html>

@@ -1,4 +1,5 @@
 <!DOCTYPE>
+<!--page for editing profile for sellers-->
 <html>
 <head>
 <title>FastLine</title>
@@ -124,6 +125,7 @@
 </head>
  
 <body>
+<!--nav bar-->
 <div  class="ui red menu">
   <div class="ui container">
     <a class="active item" href="/home">Home</a>
@@ -145,6 +147,7 @@
   </div>
 </div>  
 
+<!--Editing-->
 <div class="ui center aligned container">
   <h1>Edit Your Profile</h1>
   <div class = 'ui orange big label'><%= user.username %></div>
@@ -156,8 +159,11 @@
 
 <div class="ui grid">
   <div class="two column row">
+
+  <!--Editing truck and account info-->
     <div class="column">
       <div class="ui center aligned segment">
+      <!--Editing account/password-->
         <h3>Account Info</h3>
         <button type="button" class='ui teal button' onclick="show('personal')">Edit</button>
         <div class="personalinfo" id="personal"  style="display:none">
@@ -169,6 +175,8 @@
             <input class="ui blue button" type="submit" value='Save'></input>
           </form>
         </div>
+
+        <!--Editing truck info-->
         <h3>Truck Info</h3>
         <button type="button" class='ui teal button' onclick="show('truck')">Edit</button>
         <div class="truckinfo" id="truck"  style="display:none">
@@ -219,8 +227,7 @@
       </div>
     </div>
   
-
-
+    <!--Editing menu for the truck-->
     <div class="column">
       <div class="ui center aligned segment">
         <h3>Menu</h3>
@@ -231,7 +238,6 @@
             
             </br>
             <input type="button" value="Add a dish" class="ui small orange button" id="add" />
-           
            <form class="ui container" id="buildyourform" action="/update-menu" method="POST">
              <h class='ui center aligned teal header'>Current Menu:</h>
              <% for(var i=0; i<user.truck.menu.length; i++) {%>

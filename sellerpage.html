@@ -1,5 +1,5 @@
-
 <!DOCTYPE html>
+<!--page for seller to view his profile as a buyer-->
 <html>
 <head>
   <!-- Standard Meta -->
@@ -22,20 +22,11 @@ $(document).ready(function(){
   });
 });
 </script>
-<style media="screen" type="text/css">
-
-.quantity{
- width: 60px;
-}
-.ui.menu{
-  height:40px;
-}
-
-</style>
 </head>
 
 
 <body style="margin:10px 40px 0 40px;">
+<!--nav bar-->
 <div id="menu" class="ui red menu">
   <div class="ui container">
     <a class="active item" href="/home">Home</a>
@@ -57,6 +48,7 @@ $(document).ready(function(){
   </div>
 </div>  
 
+<!--truck info-->
 <div class="ui segment">
 <div class="ui container" >
   <div class="ui relaxed divided items">
@@ -89,47 +81,48 @@ $(document).ready(function(){
   </div>  
  </div>
 
+
 <div class="ui grid">
   <div class="two column row">
-    <div class="column">
 
+  <!--review and address section-->
+    <div class="column">
       <div class="ui pointing secondary demo menu">
         <a class="active red item" data-tab="first">Your Reviews</a>
         <a class="blue item" data-tab="second">Make a comment of yourself</a>
         <a class="green item" data-tab="third">Address</a>
       </div>
 
-    <div class="row">
-      <div class="ui active tab segment" data-tab="first">
-        <div class="ui comments">
+      <!--view comments-->
+       <div class="row">
+              <div class="ui active tab segment" data-tab="first">
+                <div class="ui comments">
 
-        <% for(var i=0; i<truck.truck.comments.length; i++) {%>
-<div class="comment">
-    <a class="avatar">
-      <img src="http://gazettereview.com/wp-content/uploads/2016/03/facebook-avatar.jpg">
-    </a>
-    <div class="content">
-      <a class="author"><%= truck.truck.comments[i].user%></a>
-      <div class="metadata">
-        <div class="date"><%= truck.truck.comments[i].date%></div>
-      </div>
-      <div class="text">
-        <p><%= truck.truck.comments[i].body%></p>
-      </div>
-    </div>
-  </div>
+                <% for(var i=0; i<truck.truck.comments.length; i++) {%>
+        <div class="comment">
+            <a class="avatar">
+              <img src="http://gazettereview.com/wp-content/uploads/2016/03/facebook-avatar.jpg">
+            </a>
+            <div class="content">
+              <a class="author"><%= truck.truck.comments[i].user%></a>
+              <div class="metadata">
+                <div class="date"><%= truck.truck.comments[i].date%></div>
+              </div>
+              <div class="text">
+                <p><%= truck.truck.comments[i].body%></p>
+              </div>
+            </div>
+          </div>
 
 
-<% } %>
-  
-  
-  </div>
-      </div>
-      
+        <% } %>
+          
+          
+          </div>
+              </div>
+      <!--leave a comment-->
       <div class="ui tab segment" data-tab="second">
-
         <h4>Leave a comment:</h4>
-        
         <form class="ui reply form" action="/addcomment/<%= truck.truck.name %>" method="POST">
           <div class="field">
             <input name="comment" class=""></input>
@@ -140,17 +133,16 @@ $(document).ready(function(){
         </form>
       </div>
       
+      <!--view map-->
       <div class="ui tab segment" data-tab="third">
-
         <a class="ui blue button" href="<%= truck.truck.map%>">Go to Google Map</a>
-
       </div>
     </div>
 
     </div>
     
+    <!--view menu-->
     <div class="column">
-
       <div class="ui list">
         <div class=" item">
         <div class="ui right aligned segment">
@@ -193,11 +185,5 @@ $(document).ready(function(){
       </div>
 </div>
 
-
-
-
-
-
 </body>
-
 </html>

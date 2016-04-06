@@ -1,5 +1,5 @@
- 
 <!DOCTYPE html>
+<!--page for all the trucks-->
 <html>
 <head>
   <!-- Standard Meta -->
@@ -33,17 +33,18 @@
     </script>
 </head>
 <body>
+<!--nav bar-->
 <div id="menu" class="ui red menu">
     <div class="ui container">
     <a class="active item" href="/home">Home</a>
     <a class="item" href="/profile">Profile</a>
-            <div class="item">
+        <div class="item">
           <form class="ui action input" action='/search' method="POST">
             <input type="text" name='keyword' placeholder="Search food or type">
             <input class="ui teal button" type='submit' value='Search'></input>
           </form>
         </div>
-    <div class="right menu">
+      <div class="right menu">
       <div class="item">
         Welcome! <%= user.username %>
       </div>
@@ -54,6 +55,8 @@
   </div>
 </div>  
 </br></br>
+
+<!--truck lists-->
 <div class='ui two column centered grid'>
 <div class="ui segment">
 <h class="ui red huge center aligned header"> Choose your truck to order!</h>
@@ -61,13 +64,14 @@
 </div>
   <div id="body" class="ui vertical stripe segment">
 </br></br>
+<!--if no truck in theh database-->
 <% if(trucks.length == 0) {%>
 <div class="ui blue center aligned segment">
 No truck is registered yet!
 </div>
  <% } %>
     <div id='list' class="ui horizontal list">
-
+<!--if more than one truck in the database, display the truck(s)-->
 <% for(var i=0; i<trucks.length; i++) {%>
 <div class="ui item">
 <div class="ui card">
