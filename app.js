@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 })); 
 app.use(expressValidator());*/ // this line must be immediately after express.bodyParser()!
 
-
+app.set('port', (process.env.PORT || 5000));
 //get the index page
 app.use('/', login);
 
@@ -54,8 +54,8 @@ app.use('/', login);
    res.render('serverSideValidation',{errors: {error1: myerror1, error2: myerror2}});
 });*/
 
-app.listen(3000);
-
-console.log('Server running on http://localhost:3000');
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
 
 
