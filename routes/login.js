@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var User = require('./user.js');
+var User = require('../routes/User.js');
 var passport = require('passport');
 var session = require('express-session');
 require('../config/passport.js')(passport)
@@ -8,11 +8,13 @@ require('../config/passport.js')(passport)
 router.use(session({secret: 'anystringoftext',
 				 saveUninitialized: true,
 				 resave: true}));
+
 /*Get home page.*/
 router.get('/', isLoggedIn, function(req, res){
   res.redirect('/home');
 });
 
+/*clear database*/
 router.get('/clear', isLoggedIn, function(req, res){
   User.remove({}, function(err) { 
     console.log('collection removed') 
@@ -33,7 +35,7 @@ router.get('/clear', isLoggedIn, function(req, res){
   res.render('admin.html', { user: admin ,message:"Database Cleared!"});
 });
 
-
+/*Get Image*/
 router.get('/truck.jpg', function(req, res) {
   res.sendFile('truck.jpg');
 });
@@ -42,22 +44,26 @@ router.get('/white.jpg', function(req, res) {
   res.sendFile('white.jpg');
 });
 
+/*Login Button request*/
 router.post('/login', passport.authenticate('local-login', {
 		successRedirect: '/home',
 		failureRedirect: '/',
 		failureFlash: true
 	}));
 
+/*Sign up Button request*/
 router.get('/register', function(req, res){
   res.render('register.html',{ message: req.flash('signupMessage'),message1: req.flash('signupMessage1')});
 });
 
+/*Sign up request of customer*/
 router.post('/signup-customer', passport.authenticate('local-signup-customer', {
 	successRedirect: '/home',
 	failureRedirect: '/register',
 	failureFlash: true
 }));
 
+/*Sign up request of seller*/
 router.post('/signup-seller', passport.authenticate('local-signup-seller', {
 	successRedirect: '/home',
 	failureRedirect: '/register',
@@ -78,6 +84,7 @@ router.get('/auth/facebook/callback',
                                       failureRedirect: '/' }));
 
 
+/*Get home page*/
 router.get('/home', isLoggedIn, function(req, res){
 	if(req.user.username == "admin@fastline.com"){
 		res.render('admin.html', { user: req.user, message: ""});
@@ -86,24 +93,28 @@ router.get('/home', isLoggedIn, function(req, res){
 	}else{
 		res.render('seller-home.html', { user: req.user });
 	}
-	});
+});
  //res.send('Username '+ username+ ' password '+ password);
 
 
+/*logout request*/
 router.get('/logout', function(req, res){
 	req.logout();
 	res.redirect('/');
 });
 
+/*Profile page*/
 router.get('/profile', isLoggedIn, function(req, res){
 		res.render('profile.html', { user: req.user });
 	});
 
+/*history of transaction page*/
 router.get('/orders', isLoggedIn, function(req, res){
 	console.log(req.user.orders);
 		res.render('history.html', { user: req.user });
 	});
 
+/*get edit page*/
 router.get('/profile/edit', isLoggedIn, function(req, res){
 	if(!req.user.truck.name){
 		res.render('edit.html', { user: req.user,message: req.flash('updateMessage')});
@@ -112,6 +123,7 @@ router.get('/profile/edit', isLoggedIn, function(req, res){
 	}
 	});
 
+/*Update request for customer*/
 router.post('/update-customer', isLoggedIn, function(req, res){
 	if(req.body.password.length < 6){
 		req.flash('updateMessage', 'Please Enter a password with at least 6 characters!');
@@ -133,6 +145,7 @@ router.post('/update-customer', isLoggedIn, function(req, res){
 	res.redirect('/profile/edit');
 });
 
+/*Update request for seller*/
 router.post('/update-seller', isLoggedIn, function(req, res){
 	var user_to_update = req.user;
 
@@ -154,6 +167,7 @@ router.post('/update-seller', isLoggedIn, function(req, res){
 	res.redirect('/profile/edit');
 });
 
+/*Update request for seller's menu*/
 router.post('/update-menu', isLoggedIn, function(req, res){
 	//var user_to_update = req.user;
 	//console.log(req.user);
@@ -190,6 +204,7 @@ router.post('/update-menu', isLoggedIn, function(req, res){
 	});		
 });
 
+/*Get all the sellers*/
 router.get('/trucklist', isLoggedIn, function(req, res){
 	//Find all books.
 	User.find({'truck.name': {$exists: true}},function(err, trucks) {
@@ -205,6 +220,7 @@ router.get('/trucklist', isLoggedIn, function(req, res){
 		
 });
 
+/*Get seller's menu*/
 router.get('/menu/:name', isLoggedIn, function(req, res){
    var truckname = req.params.name;
    User.findOne({'truck.name': truckname}, function(err, truck) {
@@ -227,7 +243,7 @@ router.get('/menu/:name', isLoggedIn, function(req, res){
 });
 
 
-
+/*Get seller's page*/
 router.get('/sellerpage/:name', isLoggedIn, function(req, res){
    var truckname = req.params.name;
    User.findOne({'truck.name': truckname}, function(err, truck) {
@@ -249,6 +265,7 @@ router.get('/sellerpage/:name', isLoggedIn, function(req, res){
   });
 });
 
+/*Handle comment*/
 router.post('/addcomment/:name', isLoggedIn, function(req, res){
     var truckname = req.params.name;
     console.log(truckname);
@@ -289,6 +306,7 @@ router.post('/addcomment/:name', isLoggedIn, function(req, res){
 	}
 	});
 
+/*Request for order*/
 router.post('/pay/:name', isLoggedIn, function(req, res){
 	var orders = {};
 	var truckname = req.params.name;
@@ -313,7 +331,7 @@ router.post('/pay/:name', isLoggedIn, function(req, res){
     }
      for(var param in req.body){
 		//var menu = JSON.stringify(req.body[param]).split(",");
-		if(req.body[param][0] != 0){
+		if(req.body[param][0] > 0){
 	    	var oneOrder = {};
 	    	oneOrder.quantity = req.body[param][0];
 	    	oneOrder.food = req.body[param][1];
@@ -355,6 +373,8 @@ router.post('/pay/:name', isLoggedIn, function(req, res){
 	
 });
 
+
+/*Get thank you page*/
 router.get('/thankyou/:username', isLoggedIn, function(req, res){
 	var username = req.params.username;
 		User.findOne({'username': username}, function(err, user) {
@@ -379,25 +399,7 @@ router.get('/thankyou/:username', isLoggedIn, function(req, res){
 	
 });
 
-function isLoggedIn(req, res, next) {
-	if(req.isAuthenticated()){
-		console.log('is logged in!');
-		//res.redirect('/home');
-		return next();
-	}
-    console.log('is not logged in!');
-	res.render('login.html', { message: req.flash('loginMessage')});
-}
-
-function turnTruckstoHtmlList(trucklist){
-    //console.log(trucklist.length);
-    var result = [];
-    for(i=0;i<trucklist.length;i++){
-       result.push(trucklist[i]);
-    }
-    return result;
-  }
-
+/*handle search request*/
 router.post('/search', function(req, res){
 	if(!req.body.keyword){
 		//res.redirect("/home");
@@ -453,6 +455,7 @@ router.post('/search', function(req, res){
 	}	 
 });
 
+/*Find food item in db*/
 function findFood(keyword){
     //var alltrucks = [];
     var resulttrucks = [];
@@ -486,6 +489,30 @@ function findFood(keyword){
     return result;
   });  
 }
+
+
+/*check if user log in*/
+function isLoggedIn(req, res, next) {
+	if(req.isAuthenticated()){
+		console.log('is logged in!');
+		//res.redirect('/home');
+		return next();
+	}
+    console.log('is not logged in!');
+	res.render('login.html', { message: req.flash('loginMessage')});
+}
+
+function turnTruckstoHtmlList(trucklist){
+    //console.log(trucklist.length);
+    var result = [];
+    for(i=0;i<trucklist.length;i++){
+       result.push(trucklist[i]);
+    }
+    return result;
+  }
+
+/*capitalize the first letter of string (from stackoverflow
+	http://stackoverflow.com/questions/1026069/capitalize-the-first-letter-of-string-in-javascript)*/
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }

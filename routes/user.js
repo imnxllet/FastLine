@@ -53,32 +53,7 @@ var User = mongoose.model('User', userSchema);
 
 
 
-  //console.log(result.length + 'TYPE!!!!!');
- // console.log(findFood(keyword));
-  //console.log(food_result + 'FOod!!!!!');
-  //res.render('search.html',{user: req.user, trucks: []});
-
-
-
-Array.prototype.unique = function() {
-    var a = this.concat();
-    for(var i=0; i<a.length; ++i) {
-        for(var j=i+1; j<a.length; ++j) {
-            if(a[i] === a[j])
-                a.splice(j--, 1);
-        }
-    }
-
-    return a;
-};
-function turnTruckstoHtmlList(trucklist){
-    //console.log(trucklist.length);
-    var result = [];
-    for(i=0;i<trucklist.length;i++){
-       result.push(trucklist[i]);
-    }
-    return result;
-  }
+  /*made admin account*/
   
   User.findOne({username: "admin@fastline.com"},function(err, user) {
       if (err) {

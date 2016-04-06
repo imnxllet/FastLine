@@ -26,8 +26,13 @@
 <div id="menu" class="ui red menu">
   <div class="ui container">
     <a class="active item" href="/home">Home</a>
+    <% if(!user.truck.name){%>
     <a class="item" href="/profile">Profile</a>
-    <a class="item" href="/trucklist">Order now!</a>
+    <% } %>
+        <% if(!user.truck.name){%>
+      <a class="item" href="/trucklist">Order now!</a>
+    <% } %>
+  
             <div class="item">
           <form class="ui action input" action='/search' method="POST">
             <input type="text" name='keyword' placeholder="Search food or type">

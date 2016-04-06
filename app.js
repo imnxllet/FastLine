@@ -34,25 +34,9 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 })); 
 app.use(expressValidator());*/ // this line must be immediately after express.bodyParser()!
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 3000));
 //get the index page
 app.use('/', login);
-
-//getting the value from a Form input
-/*app.post('/signup', function(req, res){
-
-    req.assert('userName', 'User Name is required').notEmpty();   
-    req.assert('userPass', 'A password is required').notEmpty();     
-
-
-    var errors = req.validationErrors();
-    var mappedErrors = req.validationErrors(true);
-
-    var myerror1 = mappedErrors.userName.msg;
-    var myerror2 = mappedErrors.userPass.msg;
-
-   res.render('serverSideValidation',{errors: {error1: myerror1, error2: myerror2}});
-});*/
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));

@@ -7,56 +7,57 @@
 <script src="http://semantic-ui.com/dist/semantic.min.js"></script>
 <script src="http://patrickgawron.com/wp/wp-content/uploads/2013/11/jquery.address.js"></script>
 </head>
+
 <body>
-<div id="menu" class="ui red menu">
-  <div class="ui container">
-    <a class="active item" href="/home">Home</a>
-    <a class="item" href="/profile">Profile</a>
-    <a class="item" href="/trucklist">Order now!</a>
-            <div class="item">
-          <form class="ui action input" action='/search' method="POST">
-            <input type="text" name='keyword' placeholder="Search food or type">
-            <input class="ui teal button" type='submit' value='Search'></input>
-          </form>
-        </div>
-    <div class="right menu">
-    <div class="item">
-        Welcome! <%= user.username %>
-      </div>
+  <div id="menu" class="ui red menu">
+    <div class="ui container">
+      <a class="active item" href="/home">Home</a>
+      <a class="item" href="/profile">Profile</a>
+      <a class="item" href="/trucklist">Order now!</a>
+              <div class="item">
+            <form class="ui action input" action='/search' method="POST">
+              <input type="text" name='keyword' placeholder="Search food or type">
+              <input class="ui teal button" type='submit' value='Search'></input>
+            </form>
+          </div>
+      <div class="right menu">
       <div class="item">
-        <a class="ui primary button" href="/logout">Log out</a>
+          Welcome! <%= user.username %>
+        </div>
+        <div class="item">
+          <a class="ui primary button" href="/logout">Log out</a>
+        </div>
       </div>
     </div>
+  </div>  
+
+  <div class="ui big green message center aligned segment">
+    <br>
+    <h1>Thank you for your order at <%= user.orders[user.orders.length - 1].truck %>!</h1>
+    <br>
+    <h2 style="color:black">Your order number is</h2>
+    <p><%= user.orders[user.orders.length - 1].number %></p>
+
+        <div class="ui segment">
+                        <table class="ui table">
+                          <thead>
+                                <tr><th>Your Order</th><th>Price</th><th>Quantity</th></tr>
+                            </thead>
+                            <tfoot>
+                                <tr><th colspan="3" class='ui center green aligned header'>Total <span class="checkout__total">
+                                $<%= user.orders[user.orders.length - 1].total%>
+                                </span></th></tr>
+                            </tfoot>
+                            <tbody>
+                            <% for(var i=0; i<user.orders[user.orders.length - 1].order.length; i++) {%>                         <tr><td><strong class="ui red header"><%= user.orders[user.orders.length - 1].order[i].food %></strong> </td><td>$<%= user.orders[user.orders.length - 1].order[i].price %></td><td><%= user.orders[user.orders.length - 1].order[i].quantity %></td></tr>                                                      <% } %>
+
+                          </tbody>
+                        </table><!-- /checkout__summary -->
+
+        </div>      
+    <br>
+    <a class="ui big green button" href="/home">Back To Home</a>
   </div>
-</div>  
-
-<div class="ui big green message center aligned segment">
-<br>
-<h1>Thank you for your order at <%= user.orders[user.orders.length - 1].truck %>!</h1>
-<br>
-<h2 style="color:black">Your order number is</h2>
-<p><%= user.orders[user.orders.length - 1].number %></p>
-
-    <div class="ui segment">
-                    <table class="ui table">
-                      <thead>
-                            <tr><th>Your Order</th><th>Price</th><th>Quantity</th></tr>
-                        </thead>
-                        <tfoot>
-                            <tr><th colspan="3" class='ui center green aligned header'>Total <span class="checkout__total">
-                            $<%= user.orders[user.orders.length - 1].total%>
-                            </span></th></tr>
-                        </tfoot>
-                        <tbody>
-                        <% for(var i=0; i<user.orders[user.orders.length - 1].order.length; i++) {%>                         <tr><td><strong class="ui red header"><%= user.orders[user.orders.length - 1].order[i].food %></strong> </td><td>$<%= user.orders[user.orders.length - 1].order[i].price %></td><td><%= user.orders[user.orders.length - 1].order[i].quantity %></td></tr>                                                      <% } %>
-
-                      </tbody>
-                    </table><!-- /checkout__summary -->
-
-    </div>      
-<br>
-<button class="ui big green button" href="/home">Back To Home</button>
-</div>
 
 
 
