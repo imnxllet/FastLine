@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../routes/User');
+var User = require('./user.js');
 var passport = require('passport');
 var session = require('express-session');
 require('../config/passport.js')(passport)
