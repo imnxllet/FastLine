@@ -296,7 +296,11 @@ router.post('/addcomment/:name', isLoggedIn, function(req, res){
 				return;
 			    });
 				console.log(req.body.comment + ' comment added!');
-				res.redirect('/menu/' + truckname);
+				if(!req.user.truck.name){
+					res.redirect('/menu/' + truckname);
+				}else{
+					res.redirect('/sellerpage/' + truckname);
+				}
 			
 			});	
 	}else{

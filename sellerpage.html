@@ -61,7 +61,7 @@ $(document).ready(function(){
 <div class="ui container" >
   <div class="ui relaxed divided items">
     <div class="item">
-      <div class="ui small image">
+      <div class="ui medium image">
         <img src="/white.jpg">
       </div>
       <div class="content">
@@ -72,14 +72,22 @@ $(document).ready(function(){
           Phone: <%= truck.truck.phone %><br>
           Type: <%= truck.truck.type_of_food %>
         </div>
-        <div class="extra">
 
+        <div class="extra">
+          <div class="ui green statistic">
+            <div class="value">
+              <%= truck.orders.length %>
+            </div>
+            <div class="ui green label">
+              Popularity
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     </div>
   </div>  
  </div>
-</div>
 
 <div class="ui grid">
   <div class="two column row">
