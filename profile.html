@@ -9,13 +9,6 @@
 	<meta name="HandheldFriendly" content="true" />
 	<meta charset="UTF-8">
 	  <style type="text/css">
-	  #card{
-	  	margin-top: 100px;
-
-	  }
-	  .ui.menu{
-		height:40px;
-	  }
 	  body{
 	  	margin:10px 40px 0 40px;
 	  }
@@ -53,14 +46,14 @@
 		  <div class="content">
 		    <div class="ui red inverted center aligned segment"><%= user.username %></div>
 		             <% if (user.truck.name) { %>
-    <div class="ui blue center aligned segment">
-    	<p>Name: <%= user.truck.name %></p>
-    	<p>Address: <%= user.truck.address %></p>
-    	<p>Hours of operation: <%= user.truck.hours %></p>
-    	<p>Phone#: <%= user.truck.phone %></p>
-    	<p>Food type: <%= user.truck.type_of_food %></p>
-    </div>
-  <% } %>
+					    <div class="ui blue center aligned segment">
+					    	<p>Name: <%= user.truck.name %></p>
+					    	<p>Address: <%= user.truck.address %></p>
+					    	<p>Hours of operation: <%= user.truck.hours %></p>
+					    	<p>Phone#: <%= user.truck.phone %></p>
+					    	<p>Food type: <%= user.truck.type_of_food %></p>
+					    </div>
+					  <% } %>
 		        <a class="ui green bottom attached button" href="/profile/edit">
 		       
 			      <i class="add icon"></i>
