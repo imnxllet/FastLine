@@ -13,13 +13,12 @@
     <a class="active item" href="/home">Home</a>
     <a class="item" href="/profile">Profile</a>
     <a class="item" href="/trucklist">Order now!</a>
-    <a class="item">          <div class="ui search">
-            <div class="ui icon input">
-              <input class="prompt" type="text" placeholder="Search food">
-              <i class="search icon"></i>
-            </div>
-            <div class="results"></div>
-          </div></a>
+            <div class="item">
+          <form class="ui action input" action='/search' method="POST">
+            <input type="text" name='keyword' placeholder="Search food or type">
+            <input class="ui teal button" type='submit' value='Search'></input>
+          </form>
+        </div>
     <div class="right menu">
     <div class="item">
         Welcome! <%= user.username %>

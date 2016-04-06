@@ -55,14 +55,12 @@ $(document).ready(function(){
   <div class="ui container">
     <a class="active item" href="/home">Home</a>
     <a class="item" href="/sellerpage/<%= user.truck.name %>">Your Page</a>
-    <a class="item">          
-    <div class="ui search">
-            <div class="ui icon input">
-              <input class="prompt" type="text" placeholder="Search orders">
-              <i class="search icon"></i>
-            </div>
-            <div class="results"></div>
-          </div></a>
+            <div class="item">
+          <form class="ui action input" action='/search' method="POST">
+            <input type="text" name='keyword' placeholder="Search food or type">
+            <input class="ui teal button" type='submit' value='Search'></input>
+          </form>
+        </div>
     <div class="right menu">
     <div class="item">
         Welcome! <%= user.username %>
@@ -99,7 +97,11 @@ $(document).ready(function(){
       </div>
 
     <div class="column" id="orders">
-
+<% if(user.orders.length == 0) {%>
+<div class="ui blue center aligned segment">
+No Order Yet!
+</div>
+ <% } %>
 <% for(var i=user.orders.length -1; i>=0; i--) {%>
 
      <div class="ui segment">
@@ -124,8 +126,20 @@ $(document).ready(function(){
     </div>   
  <% } %>
   </div>
+  </div>
+  </div>
+<br><br>
+  <div class="ui blue vertical footer segment">
+    <div class="ui container">
+      <div class="ui stackable inverted divided equal height stackable grid">
+        <div class="seven wide column">
+          <h4 class="ui inverted header">Designer</h4>
+          <p class="ui blue header">This web is deigned by Chris, Lei, Josh and Jason.</p>
 
-
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 

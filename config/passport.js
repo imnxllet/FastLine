@@ -69,6 +69,7 @@ module.exports = function(passport) {
 				    newUser.truck.hours = req.body.hour;
 				    newUser.truck.phone = req.body.phone;
 				    newUser.truck.type_of_food = req.body.type;
+				    newUser.truck.map = req.body.map;
 					
 					newUser.save(function(err){
 						if(err)

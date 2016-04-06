@@ -9,8 +9,28 @@ router.use(session({secret: 'anystringoftext',
 				 saveUninitialized: true,
 				 resave: true}));
 /*Get home page.*/
-router.get('/', isLoggedIn,function(req, res){
+router.get('/', isLoggedIn, function(req, res){
   res.redirect('/home');
+});
+
+router.get('/clear', isLoggedIn, function(req, res){
+  User.remove({}, function(err) { 
+    console.log('collection removed') 
+   });
+  var admin = new User();
+          admin.username = 'admin@fastline.com';
+          admin.password = admin.generateHash('adminfastline');
+          //admin.truck.name = 'mi';
+
+
+          admin.save(function (err) {
+              if (err) {
+                console.log(err);
+                return;
+              }});
+
+          console.log('Admin save!');
+  res.render('admin.html', { user: admin ,message:"Database Cleared!"});
 });
 
 
@@ -59,7 +79,9 @@ router.get('/auth/facebook/callback',
 
 
 router.get('/home', isLoggedIn, function(req, res){
-	if(!req.user.truck.name){
+	if(req.user.username == "admin@fastline.com"){
+		res.render('admin.html', { user: req.user, message: ""});
+	}else if(!req.user.truck.name){
 		res.render('index.html', { user: req.user });
 	}else{
 		res.render('seller-home.html', { user: req.user });
@@ -120,7 +142,7 @@ router.post('/update-seller', isLoggedIn, function(req, res){
     user_to_update.truck.hours = req.body.hour;
     user_to_update.truck.phone = req.body.phone;
     user_to_update.truck.type_of_food = req.body.type;
-	
+	user_to_update.truck.map = req.body.map;
 	user_to_update.save(function(err){
 		if(err)
 			throw err;
@@ -392,6 +414,9 @@ router.post('/search', function(req, res){
 		        console.log("error!" + err);
 		        return;
 		      }
+		      trucklist.sort(function(f, g) {
+				    return parseFloat(g.orders.length) - parseFloat(f.orders.length);
+				});
 		      res.render("search.html", {user: req.user, trucks: trucklist, message:""});
 
 		   });
@@ -420,6 +445,9 @@ router.post('/search', function(req, res){
 		    if(resulttrucks.length == 0){
 		    	 res.render("search.html", {user: req.user,trucks: resulttrucks,message: "No truck found"});
 		    	}else{
+		    		  resulttrucks.sort(function(f, g) {
+				    return parseFloat(g.orders.length) - parseFloat(f.orders.length);
+				});
 		    res.render("search.html", {user: req.user,trucks: resulttrucks,message:""});}
 		  });
 	}	 

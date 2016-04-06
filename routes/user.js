@@ -29,7 +29,8 @@ var userSchema = new Schema({
     type_of_food: String,
     comments: [{user: String, body: String, date: Date }],
      rating:[{rate: Number}],
-  menu: [{ price: Number, food: String }]}
+  menu: [{ price: Number, food: String }],
+map:String}
 });
 
 
@@ -78,38 +79,32 @@ function turnTruckstoHtmlList(trucklist){
     }
     return result;
   }
-  /*User.find({truck: {$exists: true}},function(err, trucks) {
+  
+  User.findOne({username: "admin@fastline.com"},function(err, user) {
       if (err) {
         res.status(500).send(err);
         console.log(err);
         return;
       }
-      console.log(trucks);
-   });
-  
-/*console.log(new User());
-var testUser = new User();
-          testUser.username = 'test@test.com';
-          testUser.password = testUser.generateHash('testtest');
-          testUser.truck.name = 'mi';*/
+      if(!user){
+        var admin = new User();
+          admin.username = 'admin@fastline.com';
+          admin.password = admin.generateHash('adminfastline');
+          //admin.truck.name = 'mi';
 
 
-/*testUser.save(function (err) {
-    if (err) {
-      console.log(err);
-      return;
-    }});
+          admin.save(function (err) {
+              if (err) {
+                console.log(err);
+                return;
+              }});
 
-console.log('usersave!/');*/
+          console.log('Admin save!');
+      }else{
+        console.log('Admin already created in db!');
+        return;
+      }
+  });
 
-/*User.findById(testUser._id, function(err, user) {
-  if (err) {
-    console.log(err);
-    return;
-  }
-
-  console.log('\n\n Found book instance: ' + user);
- });*/
- 
 
 module.exports = User;

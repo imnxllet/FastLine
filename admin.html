@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Admin</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <link rel="stylesheet" href="http://semantic-ui.com/dist/semantic.min.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="HandheldFriendly" content="true" />
     <meta charset="UTF-8">
 </head>
 <body>
-<div class="ui center aligned segment">
+<br><br>
+<div id="card" class="ui centered card">
               <div class="image">
                 <img src="http://semantic-ui.com/images/avatar2/large/elyse.png">
               </div>
               <div class="content">
                 <div class="ui red inverted center aligned segment"><%= user.username %></div>
-                  <a class="ui blue bottom attached button">
-                    <i class="add icon"></i>
-                      Clear User
-                  </a>
-                  <a class="ui blue bottom attached button">
-                    <i class="add icon"></i>
+                  <a class="ui green bottom attached button" href ="/clear" id="clear">
+                    <i class="minus icon"></i>
                       Clear Database
                   </a>
+                   <a class="ui red bottom attached button" href="/logout">
+                    Log Out
+                  </a>
               </div>
+              <% if (message) { %>
+    <div class="ui massive green message"><p class="ui center aligned container"><%= message %></p></div>
+  <% } %>
       </div>
 </body>
-</html>>
+</html>
