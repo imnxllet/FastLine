@@ -22,7 +22,7 @@ describe('HTTP Server Test', function(){
   after(function(){
     server.close();
   });
-
+  //testing displaying login page
   describe('test login page', function(){
     it('should return login page', function(done){
       http.get('http://localhost:3000', function(response){
@@ -41,10 +41,11 @@ describe('HTTP Server Test', function(){
     });
   });
 
-var Register = require('./config/passport.js');
-var reg = new Register(mongodb://localhost/);
-var Login = require('.routes/login.js');
-var log = new Login(mongodb://localhost/);
+	var Register = require('./config/passport.js');
+	var reg = new Register(mongodb://localhost/);
+	var Login = require('.routes/login.js');
+	var log = new Login(mongodb://localhost/);
+	//testing register&login
 	describe('test buyer account', function(){
 		var user = {
 			email:'test@test.com',
@@ -65,25 +66,25 @@ var log = new Login(mongodb://localhost/);
 			});
 		});
 	});
-
-  describe('test home page', function(){
-    it('should login', function(done){
-      userInfo = {email: 'test@test.com', password:{
-          plain:'test'
-      }};
-      var post_data = querystring.stringify({
-        'json' : JSON.stringify(userInfo)
-      });
-      var post_options = {
-       host: 'localhost',
-       port: '3000',
-       path: '/home',
-       cookie: cookie,
-       method: 'POST'
-      };
-    });
-  });
-
+	//testing for home page
+	describe('test home page', function(){
+	    it('should login', function(done){
+	     	userInfo = {email: 'test@test.com', password:{
+	          plain:'test'
+	    }};
+	    var post_data = querystring.stringify({
+	        'json' : JSON.stringify(userInfo)
+	    });
+	    var post_options = {
+	       host: 'localhost',
+	       port: '3000',
+	       path: '/home',
+	       cookie: cookie,
+	       method: 'POST'
+	      };
+	    });
+	});
+	//testing for logout
 	describe('test logout', function(){
     it('should logout', function(done){
       var logout = {
