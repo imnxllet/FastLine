@@ -53,256 +53,233 @@ function formcheck() {
 </script>
 </head>
 
-
 <body style="margin:10px 40px 0 40px;">
 <!--nav bar-->
-<div id="menu" class="ui red menu">
-  <div class="ui container">
-    <a class="active item" href="/home">Home</a>
-    <a class="item" href="/profile">Profile</a>
-    <a class="item" href="/trucklist">Order now!</a>
-            <div class="item">
-          <form class="ui action input" action='/search' method="POST">
-            <input type="text" name='keyword' placeholder="Search food or type">
-            <input class="ui teal button" type='submit' value='Search'></input>
-          </form>
-        </div>
-    <div class="right menu">
-    <div class="item">
-        Welcome! <%= user.username %>
-      </div>
-      <div class="item">
-        <a class="ui primary button" href="/logout">Log out</a>
-      </div>
-    </div>
-  </div>
-</div>  
-
-<div class="ui segment">
-<div class="ui container" >
-  <div class="ui relaxed divided items">
-    <div class="item">
-      <div class="ui medium image">
-        <img src="/white.jpg">
-      </div>
-      <!--truck profile-->
-      <div class="content">
-        <h class="ui red huge header"><%= truck.truck.name %></h>
-        <div class="description">
-          Location: <%= truck.truck.address %><br>
-          Hours: <%= truck.truck.hours %><br>
-          Phone: <%= truck.truck.phone %><br>
-          Type: <%= truck.truck.type_of_food %>
-        </div>
-
-        <div class="extra">
-          <div class="ui green statistic">
-            <div class="value">
-              <%= truck.orders.length %>
-            </div>
-            <div class="ui green label">
-              Popularity
-            </div>
+  <div id="menu" class="ui red menu">
+    <div class="ui container">
+      <a class="active item" href="/home">Home</a>
+      <a class="item" href="/profile">Profile</a>
+      <a class="item" href="/trucklist">Order now!</a>
+              <div class="item">
+            <form class="ui action input" action='/search' method="POST">
+              <input type="text" name='keyword' placeholder="Search food or type">
+              <input class="ui teal button" type='submit' value='Search'></input>
+            </form>
           </div>
+      <div class="right menu">
+      <div class="item">
+          Welcome! <%= user.username %>
         </div>
+        <div class="item">
+          <a class="ui primary button" href="/logout">Log out</a>
         </div>
       </div>
     </div>
   </div>  
- </div>
-
-
-<div class="ui grid">
-  <div class="three column row">
-    <div class="column">
-<!--review section-->
-      <div class="ui pointing secondary demo menu">
-        <a class="active red item" data-tab="first">Reviews</a>
-        <a class="blue item" data-tab="second">Make a comment</a>
-        <a class="green item" data-tab="third">Address</a>
-      </div>
-      <!--comment-->
-    <div class="row">
-      <div class="ui active tab segment" data-tab="first">
-        <div class="ui comments">
-
-        <% for(var i=0; i<truck.truck.comments.length; i++) {%>
-<div class="comment">
-    <a class="avatar">
-      <img src="http://gazettereview.com/wp-content/uploads/2016/03/facebook-avatar.jpg">
-    </a>
-    <div class="content">
-      <a class="author"><%= truck.truck.comments[i].user%></a>
-      <div class="metadata">
-        <div class="date"><%= truck.truck.comments[i].date%></div>
-      </div>
-      <div class="text">
-        <p><%= truck.truck.comments[i].body%></p>
-      </div>
-    </div>
-  </div>
-
-
-<% } %>
-  
-  
-  </div>
-      </div>
-      <!--leave a comment for the truck-->
-      <div class="ui tab segment" data-tab="second">
-        <h4>Leave a comment:</h4>
-        
-        <form class="ui reply form" action="/addcomment/<%= truck.truck.name %>" method="POST">
-          <div class="field">
-            <input name="comment" class=""></input>
+  <!--page content-->
+  <div class="ui segment">
+  <div class="ui container" >
+    <div class="ui relaxed divided items">
+      <div class="item">
+        <div class="ui medium image">
+          <img src="/white.jpg">
+        </div>
+        <!--truck profile-->
+        <div class="content">
+          <h class="ui red huge header"><%= truck.truck.name %></h>
+          <div class="description">
+            Location: <%= truck.truck.address %><br>
+            Hours: <%= truck.truck.hours %><br>
+            Phone: <%= truck.truck.phone %><br>
+            Type: <%= truck.truck.type_of_food %>
           </div>
-          <input class="ui orange submit button" type='submit' value='Add Comment'>
-          </input>
-        
-        </form>
-      </div>
-      <!--map for the truck-->
-      <div class="ui tab segment" data-tab="third">
 
-        <a class="ui blue button" href="<%= truck.truck.map%>">Go to Google Map</a>
+          <div class="extra">
+            <div class="ui green statistic">
+              <div class="value">
+                <%= truck.orders.length %>
+              </div>
+              <div class="ui green label">
+                Popularity
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+  <!--page content-->
+  <div class="ui grid">
+    <div class="three column row">
+      <!--first column-->
+      <div class="column">
+        <!--review section-->
+        <div class="ui pointing secondary demo menu">
+          <a class="active red item" data-tab="first">Reviews</a>
+          <a class="blue item" data-tab="second">Make a comment</a>
+          <a class="green item" data-tab="third">Address</a>
+        </div>
+        <!--comment-->
+        <div class="row">
+          <div class="ui active tab segment" data-tab="first">
+            <div class="ui comments">
+
+          <% for(var i=0; i<truck.truck.comments.length; i++) {%>
+            <div class="comment">
+                <a class="avatar">
+                  <img src="http://gazettereview.com/wp-content/uploads/2016/03/facebook-avatar.jpg">
+                </a>
+                <div class="content">
+                  <a class="author"><%= truck.truck.comments[i].user%></a>
+                  <div class="metadata">
+                    <div class="date"><%= truck.truck.comments[i].date%></div>
+                  </div>
+                  <div class="text">
+                    <p><%= truck.truck.comments[i].body%></p>
+                  </div>
+                </div>
+              </div>
+          <% } %>
+          </div>
+        </div>
+        <!--leave a comment for the truck-->
+        <div class="ui tab segment" data-tab="second">
+          <h4>Leave a comment:</h4>
+          <form class="ui reply form" action="/addcomment/<%= truck.truck.name %>" method="POST">
+            <div class="field">
+              <input name="comment" class=""></input>
+            </div>
+            <input class="ui orange submit button" type='submit' value='Add Comment'>
+            </input>
+          </form>
+        </div>
+        <!--map for the truck-->
+        <div class="ui tab segment" data-tab="third">
+          <a class="ui blue button" href="<%= truck.truck.map%>">Go to Google Map</a>
+        </div>
       </div>
     </div>
-
-    </div>
-    
+    <!--second column-->
     <div class="column">
-    <!--menu for the food truck-->
+      <!--menu for the food truck-->
       <div class="ui list">
         <div class=" item">
         <div class="ui right aligned segment">
-              <h2 class="ui header">
-        <i class="food icon"></i>
-        <div class="content">
-          Menu
+          <h2 class="ui header">
+          <i class="food icon"></i>
+          <div class="content">Menu</div>
+          </h2>
+            <div class="ui celled horizontal list">
+              <div class="item"> <h5 class="ui red header">Quantity</h5></div>
+              <div class="item"> <h5 class="ui red header">Dish</h5></div>
+              <div class="item"><h5 class="ui red header">Price</h5></div>
+            </div>
+          </div>
         </div>
-      </h2>
-          <div class="ui celled horizontal list">
-            <div class="item"> <h5 class="ui red header">Quantity</h5></div>
-            <div class="item"> <h5 class="ui red header">Dish</h5></div>
-            <div class="item"><h5 class="ui red header">Price</h5></div>
-          </div>
-        </div></div>
-         
-          <div class='ui center aligned segment'> 
+        <!--menu-->
+        <div class='ui center aligned segment'> 
           <form id='menuform' class="ui form" action='/pay/<%= truck.truck.name%>' method="POST">
-        <% for(var i=0; i<truck.truck.menu.length; i++) {%>
-          <div class="ui item">
-               <div class="item">
-                  <div class="ui celled horizontal list">
-                    <div class="item"><input class="ui mini input" type='number' size='100' name='dish<%= i %>' placeholder='Quantity'/>
-                    </div>
-                    <div class="item">
-                      <input name='dish<%= i %>' type='hidden' value='<%= truck.truck.menu[i].food%>'/>
-                      <p class='ui huge red header'><%= truck.truck.menu[i].food%></p>
-                    </div>
-                    <div class="item">
-                      <input name='dish<%= i %>' type='hidden' value='<%= truck.truck.menu[i].price%>'/>
-                      <p class='ui big teal header'><%= truck.truck.menu[i].price%></p>
-                    </div>
-                  </div>         
-                </div>
-              </div>     
-        <% } %>
-        </form>
+          <% for(var i=0; i<truck.truck.menu.length; i++) {%>
+            <div class="ui item">
+                 <div class="item">
+                    <div class="ui celled horizontal list">
+                      <div class="item"><input class="ui mini input" type='number' size='100' name='dish<%= i %>' placeholder='Quantity'/>
+                      </div>
+                      <div class="item">
+                        <input name='dish<%= i %>' type='hidden' value='<%= truck.truck.menu[i].food%>'/>
+                        <p class='ui huge red header'><%= truck.truck.menu[i].food%></p>
+                      </div>
+                      <div class="item">
+                        <input name='dish<%= i %>' type='hidden' value='<%= truck.truck.menu[i].price%>'/>
+                        <p class='ui big teal header'><%= truck.truck.menu[i].price%></p>
+                      </div>
+                    </div>         
+                  </div>
+                </div>     
+          <% } %>
+          </form>
         </div>     
-        
-        
-        </div>        
-      </div>
-
-
+      </div>        
+    </div>
     <div class="center aligned column">
-  <% if (message.length > 0) { %>
-    <div class="ui red message"><%= message %></div>
-  <% } %>
-
-  <!--payment-->
+    <% if (message.length > 0) { %>
+      <div class="ui red message"><%= message %></div>
+    <% } %>
+    <!--payment-->
     <div class="column">
-      <div class="ui segment">
-        <h3 class="care1" style="color: darkblue;"> Please Choose a Payment method :)</h3>
-
-        <div class= "payment">
-          <div class="ui green segment">
-            <h2>Pay by Cash:</h2>
-            <button class="ui big green button" id="button1">Place Order</button>
-          </div>
-
-
-           <div class="ui red segment">
-            <div class="ui form" id="paymentform">
-              <div class="form-container">
-                  <h2>Pay by Credit Card:</h2>
-                  <div class ="billig information">
-                    <p>Billing Information:</p>
-                <input id="input-field" type="text" name="billaddress" required="required" autocomplete="on" placeholder="Address"/>
-
-                <input id="left" type="text" name="cityname" required="required" autocomplete="on" placeholder="City"/>
-
-                <input id="right" type="text" name="postalzip" required="required" autocomplete="on" maxlength="6" placeholder="Postal/ZIP code"/>
-                
-                <input id="input-field" type="email" name="email" required="required" autocomplete="on" placeholder="Email"/>
-              </div>
-          <h4 class="ui dividing header">Billing Information</h4>
-            <div class="field">
-              <label>Card Type</label>
-              <select class="ui fluid dropdown">
-                  <option value="">Card Type</option>
-              <option value="AL">American Express</option>
-              <option value="AK">Visa</option>
-              <option value="AZ">Master Card</option>
-
-                </select>
+        <div class="ui segment">
+          <h3 class="care1" style="color: darkblue;"> Please Choose a Payment method :)</h3>
+          <div class= "payment">
+            <div class="ui green segment">
+              <h2>Pay by Cash:</h2>
+              <button class="ui big green button" id="button1">Place Order</button>
             </div>
-            <div class="fields">
-              <div class="seven wide field">
-                <label>Card Number</label>
-                <input type="text" name="card[number]" maxlength="16" placeholder="Card #" required="required">
-              </div>
-              <div class="three wide field">
-                <label>CVC</label>
-                <input type="text" name="card[cvc]" maxlength="3" placeholder="CVC" required="required">
-              </div>
-              <div class="six wide field">
-                <label>Expiration</label>
-                <div class="two fields">
-                  <div class="field">
-                    <select class="ui fluid search dropdown" name="card[expire-month]" required="required">
-                      <option value="">Month</option>
-                      <option value="1">January</option>
-                      <option value="2">February</option>
-                      <option value="3">March</option>
-                      <option value="4">April</option>
-                      <option value="5">May</option>
-                      <option value="6">June</option>
-                      <option value="7">July</option>
-                      <option value="8">August</option>
-                      <option value="9">September</option>
-                      <option value="10">October</option>
-                      <option value="11">November</option>
-                      <option value="12">December</option>
-                    </select>
-                  </div>
-                  <div class="field">
-                    <input type="text" name="card[expire-year]" maxlength="4" placeholder="Year" required="required">
-                  </div>
+            <div class="ui red segment">
+              <div class="ui form" id="paymentform">
+                <div class="form-container">
+                    <h2>Pay by Credit Card:</h2>
+                    <div class ="billig information">
+                      <p>Billing Information:</p>
+                      <input id="input-field" type="text" name="billaddress" required="required" autocomplete="on" placeholder="Address"/>
+                      <input id="left" type="text" name="cityname" required="required" autocomplete="on" placeholder="City"/>
+                      <input id="right" type="text" name="postalzip" required="required" autocomplete="on" maxlength="6" placeholder="Postal/ZIP code"/>
+                      <input id="input-field" type="email" name="email" required="required" autocomplete="on" placeholder="Email"/>
+                    </div>
+                    <h4 class="ui dividing header">Billing Information</h4>
+                      <div class="field">
+                        <label>Card Type</label>
+                        <select class="ui fluid dropdown">
+                            <option value="">Card Type</option>
+                        <option value="AL">American Express</option>
+                        <option value="AK">Visa</option>
+                        <option value="AZ">Master Card</option>
+
+                          </select>
+                      </div>
+                      <div class="fields">
+                        <div class="seven wide field">
+                          <label>Card Number</label>
+                          <input type="text" name="card[number]" maxlength="16" placeholder="Card #" required="required">
+                        </div>
+                        <div class="three wide field">
+                          <label>CVC</label>
+                          <input type="text" name="card[cvc]" maxlength="3" placeholder="CVC" required="required">
+                        </div>
+                        <div class="six wide field">
+                          <label>Expiration</label>
+                          <div class="two fields">
+                            <div class="field">
+                              <select class="ui fluid search dropdown" name="card[expire-month]" required="required">
+                                <option value="">Month</option>
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                              </select>
+                            </div>
+                        <div class="field">
+                          <input type="text" name="card[expire-year]" maxlength="4" placeholder="Year" required="required">
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
                 </div>
-              </div>
-            </div>
-                
-              </div>
-              <button class="ui big red button" id='button2'>Place Order</button>
+                <button class="ui big red button" id='button2'>Place Order</button>
               </div> <!-- end of form-container -->
             </div>
+        </div>
       </div>
     </div>
   </div>
-
-</div>
 
 </body>
 </html>
