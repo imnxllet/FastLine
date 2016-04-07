@@ -12,6 +12,18 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var flash = require('connect-flash');
+var Ddos = require('ddos');
+//ddos security
+var ddos = new Ddos({
+	maxcount: 30,
+	burst: 8,
+	limit: 8 * 30,
+	maxexpiry: 120,
+	checkinterval : 0.5,
+	errormessage : '[DOS Alert] Please wait 120 seconds and try again!',
+	testmode: false
+});
+app.use(ddos.express);
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
