@@ -24,6 +24,7 @@
     "morgan": "~1.5.3",
     "passport": "^0.3.2",
     "xss-filters": "~1.2.6",
+    "ddos": "~0.1.7",
     "passport-facebook": "^2.1.0",
     "passport-local": "^1.0.0",
     "serve-favicon": "~2.3.0"
