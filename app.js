@@ -20,7 +20,7 @@ var ddos = new Ddos({
 	limit: 8 * 30,
 	maxexpiry: 120,
 	checkinterval : 0.5,
-	errormessage : '[DOS Alert] Please wait 120 seconds and try again!',
+	errormessage : '[DenialOfService] Please wait 2 minutes then try again!',
 	testmode: false
 });
 app.use(ddos.express);
