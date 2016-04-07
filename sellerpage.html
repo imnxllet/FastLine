@@ -27,163 +27,163 @@ $(document).ready(function(){
 
 <body style="margin:10px 40px 0 40px;">
 <!--nav bar-->
-<div id="menu" class="ui red menu">
-  <div class="ui container">
-    <a class="active item" href="/home">Home</a>
-    <a class="item" href="/profile/edit">Edit your Profile</a>
-            <div class="item">
-          <form class="ui action input" action='/search' method="POST">
-            <input type="text" name='keyword' placeholder="Search food or type">
-            <input class="ui teal button" type='submit' value='Search'></input>
-          </form>
-        </div>
-    <div class="right menu">
-    <div class="item">
-        Welcome! <%= user.username %>
-      </div>
-      <div class="item">
-        <a class="ui primary button" href="/logout">Log out</a>
-      </div>
-    </div>
-  </div>
-</div>  
-
-<!--truck info-->
-<div class="ui segment">
-<div class="ui container" >
-  <div class="ui relaxed divided items">
-    <div class="item">
-      <div class="ui medium image">
-        <img src="/white.jpg">
-      </div>
-      <div class="content">
-        <h class="ui red huge header"><%= truck.truck.name %></h>
-        <div class="description">
-          Location: <%= truck.truck.address %><br>
-          Hours: <%= truck.truck.hours %><br>
-          Phone: <%= truck.truck.phone %><br>
-          Type: <%= truck.truck.type_of_food %>
-        </div>
-
-        <div class="extra">
-          <div class="ui green statistic">
-            <div class="value">
-              <%= truck.orders.length %>
-            </div>
-            <div class="ui green label">
-              Popularity
-            </div>
+  <div id="menu" class="ui red menu">
+    <div class="ui container">
+      <a class="active item" href="/home">Home</a>
+      <a class="item" href="/profile/edit">Edit your Profile</a>
+              <div class="item">
+            <form class="ui action input" action='/search' method="POST">
+              <input type="text" name='keyword' placeholder="Search food or type">
+              <input class="ui teal button" type='submit' value='Search'></input>
+            </form>
           </div>
+      <div class="right menu">
+      <div class="item">
+          Welcome! <%= user.username %>
         </div>
+        <div class="item">
+          <a class="ui primary button" href="/logout">Log out</a>
         </div>
       </div>
     </div>
   </div>  
- </div>
 
+<!--truck info-->
+  <div class="ui segment">
+  <div class="ui container" >
+    <div class="ui relaxed divided items">
+      <div class="item">
+        <div class="ui medium image">
+          <img src="/white.jpg">
+        </div>
+        <div class="content">
+          <h class="ui red huge header"><%= truck.truck.name %></h>
+          <div class="description">
+            Location: <%= truck.truck.address %><br>
+            Hours: <%= truck.truck.hours %><br>
+            Phone: <%= truck.truck.phone %><br>
+            Type: <%= truck.truck.type_of_food %>
+          </div>
 
-<div class="ui grid">
-  <div class="two column row">
-
-  <!--review and address section-->
-    <div class="column">
-      <div class="ui pointing secondary demo menu">
-        <a class="active red item" data-tab="first">Your Reviews</a>
-        <a class="blue item" data-tab="second">Make a comment of yourself</a>
-        <a class="green item" data-tab="third">Address</a>
-      </div>
-
-      <!--view comments-->
-       <div class="row">
-              <div class="ui active tab segment" data-tab="first">
-                <div class="ui comments">
-
-                <% for(var i=0; i<truck.truck.comments.length; i++) {%>
-        <div class="comment">
-            <a class="avatar">
-              <img src="http://gazettereview.com/wp-content/uploads/2016/03/facebook-avatar.jpg">
-            </a>
-            <div class="content">
-              <a class="author"><%= truck.truck.comments[i].user%></a>
-              <div class="metadata">
-                <div class="date"><%= truck.truck.comments[i].date%></div>
+          <div class="extra">
+            <div class="ui green statistic">
+              <div class="value">
+                <%= truck.orders.length %>
               </div>
-              <div class="text">
-                <p><%= truck.truck.comments[i].body%></p>
+              <div class="ui green label">
+                Popularity
               </div>
             </div>
           </div>
-
-
-        <% } %>
-          
-          
           </div>
+        </div>
+      </div>
+    </div>  
+   </div>
+
+
+  <div class="ui grid">
+    <div class="two column row">
+
+    <!--review and address section-->
+      <div class="column">
+        <div class="ui pointing secondary demo menu">
+          <a class="active red item" data-tab="first">Your Reviews</a>
+          <a class="blue item" data-tab="second">Make a comment of yourself</a>
+          <a class="green item" data-tab="third">Address</a>
+        </div>
+
+        <!--view comments-->
+         <div class="row">
+                <div class="ui active tab segment" data-tab="first">
+                  <div class="ui comments">
+
+                  <% for(var i=0; i<truck.truck.comments.length; i++) {%>
+          <div class="comment">
+              <a class="avatar">
+                <img src="http://gazettereview.com/wp-content/uploads/2016/03/facebook-avatar.jpg">
+              </a>
+              <div class="content">
+                <a class="author"><%= truck.truck.comments[i].user%></a>
+                <div class="metadata">
+                  <div class="date"><%= truck.truck.comments[i].date%></div>
+                </div>
+                <div class="text">
+                  <p><%= truck.truck.comments[i].body%></p>
+                </div>
               </div>
-      <!--leave a comment-->
-      <div class="ui tab segment" data-tab="second">
-        <h4>Leave a comment:</h4>
-        <form class="ui reply form" action="/addcomment/<%= truck.truck.name %>" method="POST">
-          <div class="field">
-            <input name="comment" class=""></input>
-          </div>
-          <input class="ui orange submit button" type='submit' value='Add Comment'>
-          </input>
+            </div>
+
+
+          <% } %>
+            
+            
+            </div>
+                </div>
+        <!--leave a comment-->
+        <div class="ui tab segment" data-tab="second">
+          <h4>Leave a comment:</h4>
+          <form class="ui reply form" action="/addcomment/<%= truck.truck.name %>" method="POST">
+            <div class="field">
+              <input name="comment" class=""></input>
+            </div>
+            <input class="ui orange submit button" type='submit' value='Add Comment'>
+            </input>
+          
+          </form>
+        </div>
         
-        </form>
+        <!--view map-->
+        <div class="ui tab segment" data-tab="third">
+          <a class="ui blue button" href="<%= truck.truck.map%>">Go to Google Map</a>
+        </div>
+      </div>
+
       </div>
       
-      <!--view map-->
-      <div class="ui tab segment" data-tab="third">
-        <a class="ui blue button" href="<%= truck.truck.map%>">Go to Google Map</a>
-      </div>
-    </div>
-
-    </div>
-    
-    <!--view menu-->
-    <div class="column">
-      <div class="ui list">
-        <div class=" item">
-        <div class="ui right aligned segment">
-              <h2 class="ui header">
-        <i class="food icon"></i>
-        <div class="content">
-          Your Menu
-        </div>
-      </h2>
-          <div class="ui celled horizontal list">
-            <div class="item"> <h5 class="ui red header">Quantity</h5></div>
-            <div class="item"> <h5 class="ui red header">Dish</h5></div>
-            <div class="item"><h5 class="ui red header">Price</h5></div>
+      <!--view menu-->
+      <div class="column">
+        <div class="ui list">
+          <div class=" item">
+          <div class="ui right aligned segment">
+                <h2 class="ui header">
+          <i class="food icon"></i>
+          <div class="content">
+            Your Menu
           </div>
-        </div></div>
-         
-          <div class='ui center aligned segment'> 
-          <form id='menuform' class="ui form" action='/pay/<%= truck.truck.name%>' method="POST">
-        <% for(var i=0; i<truck.truck.menu.length; i++) {%>
-          <div class="ui item">
-               <div class="item">
-                  <div class="ui celled horizontal list">
-                    <div class="item">
-                      <input name='dish<%= i %>' type='hidden' value='<%= truck.truck.menu[i].food%>'/>
-                      <p class='ui huge red header'><%= truck.truck.menu[i].food%></p>
-                    </div>
-                    <div class="item">
-                      <input name='dish<%= i %>' type='hidden' value='<%= truck.truck.menu[i].price%>'/>
-                      <p class='ui big teal header'><%= truck.truck.menu[i].price%></p>
-                    </div>
-                  </div>         
-                </div>
-              </div>     
-        <% } %>
-        </form>
-        </div>     
-        
-        
-        </div>        
-      </div>
-</div>
+        </h2>
+            <div class="ui celled horizontal list">
+              <div class="item"> <h5 class="ui red header">Quantity</h5></div>
+              <div class="item"> <h5 class="ui red header">Dish</h5></div>
+              <div class="item"><h5 class="ui red header">Price</h5></div>
+            </div>
+          </div></div>
+           
+            <div class='ui center aligned segment'> 
+            <form id='menuform' class="ui form" action='/pay/<%= truck.truck.name%>' method="POST">
+          <% for(var i=0; i<truck.truck.menu.length; i++) {%>
+            <div class="ui item">
+                 <div class="item">
+                    <div class="ui celled horizontal list">
+                      <div class="item">
+                        <input name='dish<%= i %>' type='hidden' value='<%= truck.truck.menu[i].food%>'/>
+                        <p class='ui huge red header'><%= truck.truck.menu[i].food%></p>
+                      </div>
+                      <div class="item">
+                        <input name='dish<%= i %>' type='hidden' value='<%= truck.truck.menu[i].price%>'/>
+                        <p class='ui big teal header'><%= truck.truck.menu[i].price%></p>
+                      </div>
+                    </div>         
+                  </div>
+                </div>     
+          <% } %>
+          </form>
+          </div>     
+          
+          
+          </div>        
+        </div>
+  </div>
 
 </body>
 </html>

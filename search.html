@@ -26,58 +26,57 @@
     </script>
 </head>
 <body>
-<!--navigation bar-->
-<div id="menu" class="ui red menu">
+  <!--navigation bar-->
+  <div id="menu" class="ui red menu">
     <div class="ui container">
     <a class="active item" href="/home">Home</a>
     <% if(!user.truck.name){%>
     <a class="item" href="/profile">Profile</a>
     <% } %>
-            <div class="item">
-          <form class="ui action input" action='/search' method="POST">
+     <div class="item">
+      <form class="ui action input" action='/search' method="POST">
             <input type="text" name='keyword' placeholder="Search food or type">
             <input class="ui teal button" type='submit' value='Search'></input>
-          </form>
+       </form>
         </div>
-    <div class="right menu">
-      <div class="item">
-        Welcome! <%= user.username %>
-      </div>
-      <div class="item">
-        <a class="ui primary button" href="/logout">Log out</a>
+      <div class="right menu">
+        <div class="item">
+          Welcome! <%= user.username %>
+        </div>
+        <div class="item">
+          <a class="ui primary button" href="/logout">Log out</a>
+        </div>
       </div>
     </div>
-  </div>
-</div>  
-</br></br>
+  </div>  
+  </br></br>
 
-<!--search page-->
-<div class='ui two column centered grid'>
-<div class="ui segment">
-<h class="ui red huge center aligned header"> Search result</h>
-</div>
-</div>
+  <!--search page-->
+  <div class='ui two column centered grid'>
+  <div class="ui segment">
+  <h class="ui red huge center aligned header"> Search result</h>
+  </div>
+  </div>
   <div id="body" class="ui vertical stripe segment"><br>
   <!--show the results of the research-->
-  <% if (message) { %>
-    <div class="ui massive red message"><p class="ui center aligned container"><%= message %></p></div>
-  <% } %>
-</br></br>
+    <% if (message) { %>
+      <div class="ui massive red message"><p class="ui center aligned container"><%= message %></p></div>
+    <% } %>
+    </br></br>
     <div id='list' class="ui horizontal list">  
-<!--displaying results-->
-<% for(var i=0; i<trucks.length; i++) {%>
-<div class="ui item">
-<div class="ui card">
-  <a class="image" href="/menu/<%= trucks[i].truck.name %>">
-    <img src="./white.jpg">
-  </a>
-  <div class="content">
-    <a class="ui center aligned huge header" href="/menu/<%= trucks[i].truck.name %>"><%= trucks[i].truck.name %></a>
-  </div>
-</div>
-</div>
-<% } %>
-
+    <!--displaying results-->
+      <% for(var i=0; i<trucks.length; i++) {%>
+      <div class="ui item">
+      <div class="ui card">
+        <a class="image" href="/menu/<%= trucks[i].truck.name %>">
+          <img src="./white.jpg">
+        </a>
+        <div class="content">
+          <a class="ui center aligned huge header" href="/menu/<%= trucks[i].truck.name %>"><%= trucks[i].truck.name %></a>
+        </div>
+      </div>
+      </div>
+      <% } %>
     </div>
   </div>
 </body>

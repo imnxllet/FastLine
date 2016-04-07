@@ -39,26 +39,24 @@ $(document).ready(function(){
     <a class="item" href="/profile">Profile</a>
     <a class="item" href="/trucklist">Order now!</a>
             <div class="item">
-          <form class="ui action input" action='/search' method="POST">
+            <form class="ui action input" action='/search' method="POST">
             <input type="text" name='keyword' placeholder="Search food or type">
             <input class="ui teal button" type='submit' value='Search'></input>
           </form>
         </div>
-    <div class="right menu">
-    <div class="item">
-        Welcome! <%= user.username %>
+        <div class="right menu">
+        <div class="item">
+            Welcome! <%= user.username %>
+          </div>
+          <div class="item">
+            <a class="ui primary button" href="/logout">Log out</a>
+          </div>
+        </div>
       </div>
-      <div class="item">
-        <a class="ui primary button" href="/logout">Log out</a>
-      </div>
-    </div>
+    </div>  
+    <div class="ui grid">
+    <div class="two column row"> 
   </div>
-</div>  
-
-<div class="ui grid">
-  <div class="two column row">
-    
-</div>
 </div>
 
 </body>

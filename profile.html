@@ -21,25 +21,25 @@
 	<body>	
 	<!--nav bar-->
 	<div id="menu" class="ui red menu">
-  	<div class="ui container">
-    <a class="active item" href="/home">Home</a>
-    <a class="item" href="/trucklist">Order Now!</a>
+	  	<div class="ui container">
+		    <a class="active item" href="/home">Home</a>
+		    <a class="item" href="/trucklist">Order Now!</a>
             <div class="item">
-          <form class="ui action input" action='/search' method="POST">
-            <input type="text" name='keyword' placeholder="Search food or type">
-            <input class="ui teal button" type='submit' value='Search'></input>
-          </form>
-        </div>
-    <div class="right menu">
-      <div class="item">
-        Welcome! <%= user.username %>
-      </div>
-      <div class="item">
-        <a class="ui primary button" href="/logout">Log out</a>
-      </div>
-    </div>
-  </div>
-</div>	
+	          <form class="ui action input" action='/search' method="POST">
+	            <input type="text" name='keyword' placeholder="Search food or type">
+	            <input class="ui teal button" type='submit' value='Search'></input>
+	          </form>
+	        </div>
+		    <div class="right menu">
+		      <div class="item">
+		        Welcome! <%= user.username %>
+		      </div>
+		      <div class="item">
+		        <a class="ui primary button" href="/logout">Log out</a>
+		      </div>
+		    </div>
+		 </div>
+	</div>	
 
 	<!--user's profile-->
 		<div id="card" class="ui centered card">
@@ -48,28 +48,24 @@
 		  </div>
 		  <div class="content">
 		    <div class="ui red inverted center aligned segment"><%= user.username %></div>
-		    		<!--check if user is the truck-->
-		             <% if (user.truck.name) { %>
-					    <div class="ui blue center aligned segment">
-					    	<p>Name: <%= user.truck.name %></p>
-					    	<p>Address: <%= user.truck.address %></p>
-					    	<p>Hours of operation: <%= user.truck.hours %></p>
-					    	<p>Phone#: <%= user.truck.phone %></p>
-					    	<p>Food type: <%= user.truck.type_of_food %></p>
-					    </div>
-					  <% } %>
+		    	<!--check if user is the truck-->
+		        <% if (user.truck.name) { %>
+					<div class="ui blue center aligned segment">
+					   	<p>Name: <%= user.truck.name %></p>
+					    <p>Address: <%= user.truck.address %></p>
+					    <p>Hours of operation: <%= user.truck.hours %></p>
+					    <p>Phone#: <%= user.truck.phone %></p>
+					    <p>Food type: <%= user.truck.type_of_food %></p>
+					</div>
+				<% } %>
 		        <a class="ui green bottom attached button" href="/profile/edit">
-		       
-			      <i class="add icon"></i>
-			      EDIT
-			    </a>
+			    <i class="add icon"></i>EDIT</a>
 			    <a class="ui blue bottom attached button" href="/orders">
-			      <i class="add icon"></i>
-			      History of Transaction
-			    </a>
+			    <i class="add icon"></i>History of Transaction</a>
 			    <p id='chris'></p>
-		  </div>
-		</div>
+		 </div>
+	</div>
+	
 	</body>
 
 </html>	
